@@ -25,6 +25,11 @@
         <li class="nav-item">
           <a class="nav-link px-3" href="#!">contact us</a>
         </li>
+        <% if signed_in? %>
+          <li class="nav-item">
+            <%= link_to("Panel",panel_path,class:"nav-link px-3")%>
+          </li>
+        <% end %>
       </ul>
 
       <ul class="navbar-nav flex-row">

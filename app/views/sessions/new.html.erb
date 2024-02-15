@@ -1,0 +1,20 @@
+<%= form_for(@admin,url: login_post_path) do |form|%>
+	<div class="row">
+		<div class="col-md-6">
+			<%= form.text_field :username,placeholder:"Kullanıcı adı"%>
+		</div>
+		<div class="col-md-6">
+			<%= form.email_field :email,placeholder:"Eposta"%>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<%= form.password_field :password,placeholder:"Şifre"%>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<%= form.submit "Gönder"%>
+		</div>
+	</div>
+<% end %>
