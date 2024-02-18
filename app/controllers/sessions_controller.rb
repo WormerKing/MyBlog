@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
 		@admin = Admin.find_by(username:get_params[:username],email:get_params[:email])
 		if @admin && @admin.authenticate(get_params[:password])
 			session[:admin_username] = @admin.username
-			redirect_to("/")
+			redirect_to("/panel")
 		else
 			puts "Geçersiz giriş denemesi"
 			render :new
