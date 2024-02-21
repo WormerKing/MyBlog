@@ -11,8 +11,8 @@
   </head>
 
   <body>
-    <%= render "layouts/navbar"%><br><br><br><br>
+    <%= render "layouts/navbar" unless controller_name == "panel"%><br><br><br><br>
     <%= yield %><br><br><br>
-    <%= render "layouts/footer"%>
+    <%= render "layouts/footer" unless controller_name == "panel"%>
   </body>
 </html>

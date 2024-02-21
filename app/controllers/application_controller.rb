@@ -5,6 +5,11 @@ class ApplicationController < ActionController::Base
 	def signed_in?
 		current_admin
 	end
+	def redirect_if_unsigned
+		unless signed_in?
+			redirect_to(root_path)
+		end
+	end
 
-	helper_method :signed_in?,:current_admin
+	helper_method :signed_in?,:current_admin,:redirect_if_unsigned
 end
