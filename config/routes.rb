@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     get "/hakkimda",to: "main#hakkimda",as: :hakkimda
     get "/projelerim",to: "main#projelerim",as: :projelerim
     get "/yazilarim",to: "main#yazilarim",as: :yazilarim
+    get "/iletisim",to: "main#iletisim",as: :iletisim
     #TODO buraya blog tarzı yazıların ve kategorilerin eklenmesi gerekli
 
     get "/hakkimda/edit",to: "panel#hakkimda",as: :edit_aboutme

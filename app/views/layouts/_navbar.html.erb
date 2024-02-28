@@ -1,35 +1,56 @@
-<%= stylesheet_link_tag "_navbar", "data-turbo-track": "reload" %>
-<nav class="navbar navbar-expand-lg fixed-top navbar-scroll shadow-0" style="background-color: #ffede7;">
+<%# stylesheet_link_tag "_navbar", "data-turbo-track": "reload" %>
+<!--nav class="navbar navbar-expand-lg fixed-top navbar-scroll shadow-0" style="background-color: #ffede7;">
   <div class="container">
-    <%= link_to("Anasayfa",root_path,class:"navbar-brand")%>
-    <button class="navbar-toggler ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
-      aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="d-flex justify-content-start align-items-center">
-        <i class="fas fa-bars"></i>
-      </span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarExample01">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0 pl-5">
-        <li class="nav-item active">
-          <%= link_to("Hakkımda",hakkimda_path,class:"nav-link px-3")%>
-        </li>
-        <li class="nav-item">
-          <%= link_to("Projelerim",projelerim_path,class:"nav-link px-3")%>
-        </li>
-        <li class="nav-item">
-          <%= link_to("Yazılarım",yazilarim_path,class:"nav-link px-3")%>
-        </li>
-      </ul>
+	<%# link_to("Anasayfa",root_path,class:"navbar-brand")%>
+	<button class="navbar-toggler ps-0" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarExample01"
+	  aria-controls="navbarExample01" aria-expanded="false" aria-label="Toggle navigation">
+	  <span class="d-flex justify-content-start align-items-center">
+		<i class="fas fa-bars"></i>
+	  </span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarExample01">
+	  <ul class="navbar-nav me-auto mb-2 mb-lg-0 pl-5">
+		<li class="nav-item active">
+		  <%# link_to("Hakkımda",hakkimda_path,class:"nav-link px-3")%>
+		</li>
+		<li class="nav-item">
+		  <%# link_to("Projelerim",projelerim_path,class:"nav-link px-3")%>
+		</li>
+		<li class="nav-item">
+		  <%# link_to("Yazılarım",yazilarim_path,class:"nav-link px-3")%>
+		</li>
+	  </ul>
 
-      <ul class="navbar-nav flex-row">
-        <li class="nav-item">
-          <% if signed_in? %>
-            <%= link_to("Panel",panel_path,class:"nav-link px-3")%>
-          <% else %>
-            <%= link_to("Giriş Yap",login_path,class:"nav-link px-3")%>
-          <% end %>
-        </li>
-      </ul>
-    </div>
+	  <ul class="navbar-nav flex-row">
+		<li class="nav-item">
+		  <%# if signed_in? %>
+			<%# link_to("Panel",panel_path,class:"nav-link px-3")%>
+		  <%# else %>
+			<%# link_to("Giriş Yap",login_path,class:"nav-link px-3")%>
+		  <%# end %>
+		</li>
+	  </ul>
+	</div>
   </div>
+</nav-->
+<nav class="navbar navbar-expand-lg fixed-top bg-info-subtle">
+	  <div class="container py-1">
+			<%= link_to("Anasayfa",root_path,class:"navbar-brand fs-4")%>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			  <span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			  <div class="navbar-nav ms-auto fs-6">
+				<%= link_to("Hakkımda",hakkimda_path,class:"nav-link text-dark px-3","aria-current"=>"page")%>
+				<%= link_to("Projelerim",projelerim_path,class:"nav-link text-dark px-3")%>
+				<%= link_to("Yazılarım",yazilarim_path,class:"nav-link text-dark px-3")%>
+				<%= link_to("İletişim",iletisim_path,class:"nav-link text-dark px-3")%>
+			  </div>
+			</div>
+	  </div>
 </nav>
+<!--div class="container-fluid bg-warning my-4">
+	<div class="row mt-5">
+		<div class="col-12"></div>
+	</div>
+</div-->
