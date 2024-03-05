@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     post "/login",to: "sessions#create",as: :login_post
     delete "/logout",to: "sessions#destroy",as: :logout
 
-    get "/panel",to: "panel#deneme",as: :panel
+    get "/panel",to: "panel#index",as: :panel
 
 
     get "/hakkimda",to: "main#hakkimda",as: :hakkimda

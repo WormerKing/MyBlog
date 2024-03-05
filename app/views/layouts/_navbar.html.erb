@@ -45,6 +45,9 @@
 				<%= link_to("Projelerim",projelerim_path,class:"nav-link text-dark px-3")%>
 				<%= link_to("Yazılarım",yazilarim_path,class:"nav-link text-dark px-3")%>
 				<%= link_to("İletişim",iletisim_path,class:"nav-link text-dark px-3")%>
+				<% if signed_in?%>
+					<%= link_to("Panel",panel_path,class:"nav-link text-dark px-3")%>
+				<% end %>
 			  </div>
 			</div>
 	  </div>
