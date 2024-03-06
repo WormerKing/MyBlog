@@ -12,11 +12,12 @@ Rails.application.routes.draw do
     get "/iletisim",to: "main#iletisim",as: :iletisim
     #TODO buraya blog tarzı yazıların ve kategorilerin eklenmesi gerekli
 
-    get "/hakkimda/edit",to: "panel#hakkimda",as: :edit_aboutme
+    get "/hakkimda/edit",to: "aboutme#edit",as: :edit_aboutme
     put "/hakkimda",to: "panel#hakkimda_update",as: :update_aboutme
 
     resources :articles
     resources :categories
+    resources :projects
     resources :admins
     root "main#index"
 end

@@ -6,71 +6,57 @@
     <aside id="sidebar" data-panel-target="sidebar">
         <div class="h-100 bg-primary">
             <div class="sidebar-logo">
-                <a href="#">Admin Panel</a>
+                <%= link_to("Admin panel",panel_path)%>
             </div>
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav">
                 <li class="sidebar-header">
-                    Tools & Components
+                    Düzenlemeler
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link">
+                    <%= link_to(edit_aboutme_path,class:"sidebar-link") do%>
                         <i class="fa-solid fa-list pe-2"></i>
-                        Profile
-                    </a>
+                        Hakkımda düzenle
+                    <%end%>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#pages"
-                        aria-expanded="false" aria-controls="pages">
-                        <i class="fa-regular fa-file-lines pe-2"></i>
-                            Pages
-                    </a>
-                    <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Analytics</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Ecommerce</a>
-                        </li>
-                        <li class="sidebar-item">
-                                <a href="#" class="sidebar-link">Crypto</a>
-                        </li>
-                    </ul>
+                    <%= link_to(projects_path,class:"sidebar-link") do%>
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Projelerim
+                    <%end%>
                 </li>
                 <li class="sidebar-item">
-                    <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard"
-                            aria-expanded="false" aria-controls="dashboard">
-                        <i class="fa-solid fa-sliders pe-2"></i>
-                        Dashboard
-                    </a>
-                    <ul id="dashboard" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Dashboard Analytics</a>
-                        </li>
-                        <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Dashboard Ecommerce</a>
-                        </li>
-                    </ul>
+                    <%= link_to(articles_path,class:"sidebar-link") do%>
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Yazılarım
+                    <%end%>
                 </li>
                 <li class="sidebar-item">
                     <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#auth"
                         aria-expanded="false" aria-controls="auth">
                         <i class="fa-regular fa-user pe-2"></i>
-                        Auth
+                        Admin İşlemleri
                     </a>
                     <ul id="auth" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Login</a>
+                            <%= link_to("Admin Kaydet",new_admin_path,class:"sidebar-link")%>
                         </li>
                         <li class="sidebar-item">
-                            <a href="#" class="sidebar-link">Register</a>
+                            <%= link_to("Adminleri Görüntüle",admins_path,class:"sidebar-link")%>
                         </li>
                     </ul>
                 </li>
-                <li class="sidebar-header">
+
+                <li class="sidebar-item pt-2">
+                    <%= link_to("Çıkış yap",logout_path,class:"sidebar-link btn btn-danger",:method => :delete,data:{turbo_method: :delete})%>
+                </li>
+
+                <!-- ####################################################### -->
+
+                <li class="sidebar-header" hidden>
                     Multi Level Nav
                 </li>
-                <li class="sidebar-item">
+                <li class="sidebar-item" hidden>
                     <a href="#" class="sidebar-link collapsed" data-bs-toggle="collapse" data-bs-target="#multi"
                             aria-expanded="false" aria-controls="multi">
                             <i class="fa-solid fa-share-nodes pe-2"></i>
@@ -105,11 +91,7 @@
             </button>
         </nav>
         <main class="content px-3 py-2">
-            <div class="container-fluid">
-                <div class="mb-3">
-                    <h3>Bootstrap Sidebar Tutorial</h3>
-                </div>
-            </div>
+            <%= yield %>
         </main>
     </div>
 </div>

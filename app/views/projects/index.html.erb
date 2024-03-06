@@ -1,0 +1,11 @@
+<div class="container-fluid">
+	<% @admins.each do |admin|%>
+		<div class="row">
+			<div class="col-sm-12">
+				<span class="px-2">Username : <%= admin.username%></span>
+				<span class="px-2">Email : <%= admin.email%></span>
+				<span class="px-2">First name : <%= admin.firstname%></span>
+			</div>
+		</div>
+	<%end%>
+</div>

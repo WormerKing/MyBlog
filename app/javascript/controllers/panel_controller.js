@@ -4,7 +4,9 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
     static targets = ["sidebar"];
     connect() {
-    
+        if (window.screen.width < 768) {
+            this.sidebarTarget.classList.toggle("collapsed");
+        }
     }
 
     changeVisibility() {
