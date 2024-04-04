@@ -3,21 +3,33 @@ Rails.application.routes.draw do
     post "/login",to: "sessions#create",as: :login_post
     delete "/logout",to: "sessions#destroy",as: :logout
 
-    get "/panel",to: "panel#index",as: :panel
+    # resource :login,controller: "sessions",except: %i[ index show edit update]
+
+    # TODO login pathleri resources ile yazılacak
 
 
-    get "/hakkimda",to: "main#hakkimda",as: :hakkimda
-    get "/projelerim",to: "main#projelerim",as: :projelerim
-    get "/yazilarim",to: "main#yazilarim",as: :yazilarim
-    get "/iletisim",to: "main#iletisim",as: :iletisim
-    #TODO buraya blog tarzı yazıların ve kategorilerin eklenmesi gerekli
+    # Anasayfa rotaları
+    get "/hakkimda",to: "aboutme#index",as: :hakkimda
+    get "/projelerim",to: "projects#index",as: :projelerim
+    get "/yazilarim",to: "articles#index",as: :yazilarim
+    get "/iletisim",to: "communication#index",as: :iletisim
 
-    get "/hakkimda/edit",to: "aboutme#edit",as: :edit_aboutme
-    put "/hakkimda",to: "panel#hakkimda_update",as: :update_aboutme
 
-    resources :articles
-    resources :categories
-    resources :projects
-    resources :admins
+    # Admin panel rotaları
+    scope :panel,path_names:{new:"yeni",edit:"duzenle"} do
+        get "/",to: "panel#index",as: :panel
+        resource :aboutme,except: %i[ new create destroy ],path: "hakkimda",controller: "aboutme"
+        resource :communication, except: %i[ new create destroy ],path: "iletisim",controller: "communication"
+        resources :projects,path: "projelerim",controller: "projects"
+        resources :articles,path: "yazilarim",controller: "articles"
+        resources :tags,path: "etiketler",controller: "tags"
+        resources :categories,path: "kategoriler",controller: "categories"
+        resources :admins,path: "yoneticiler",controller: "admins"
+    end
+
+    # resources :articles
+    # resources :categories
+    # resources :projects
+    # resources :admins
     root "main#index"
 end

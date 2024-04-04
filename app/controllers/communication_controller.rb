@@ -1,0 +1,2 @@
+class CommunicationController < ApplicationController
+end

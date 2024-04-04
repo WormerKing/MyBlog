@@ -4,23 +4,23 @@
 		<div class="row">
 			<div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
 				<div class="border border-dark my-5 rounded-2 bg-primary-subtle tasiyici">
-					<%= form_for @admin,url: login_post_path do |form|%>
+					<%= form_with(url: login_post_path,method: "post",scope:"admin") do |form|%>
 						<div class="row">
 							<h2 class="text-center pt-4 text-dark">Admin Girişi</h2>
 						</div>
 						<div class="row mx-3">
 							<div class="col-sm-12 py-2 text-start">
-								<%= form.text_field("username",class:"form-control fs-4",placeholder:"Kullanıcı adı")%>
+								<%= form.text_field("username",class:"form-control fs-4",placeholder:"Kullanıcı adı",required:"")%>
 							</div>
 						</div>
 						<div class="row pt-3 mx-3">
 							<div class="col-sm-12 py-2">
-								<%= form.email_field("email",class:"form-control fs-4",placeholder:"Eposta")%>
+								<%= form.email_field("email",class:"form-control fs-4",placeholder:"Eposta",required:"")%>
 							</div>
 						</div>
 						<div class="row pt-3 mx-3">
 							<div class="col-sm-12 py-2">
-								<%= form.password_field("password",class:"form-control fs-4",placeholder:"Şifre")%>
+								<%= form.password_field("password",class:"form-control fs-4",placeholder:"Şifre",required:"")%>
 							</div>
 						</div>
 						<div class="row">
