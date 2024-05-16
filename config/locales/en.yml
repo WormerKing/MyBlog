@@ -26,6 +26,22 @@
 #     en:
 #       "yes": yup
 #       enabled: "ON"
-
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        admin:
+          attributes:
+            email:
+              blank: "Please Specify an Email id"
+              taken: "Please use a different Email id"
+              invalid: "Please Specify a valid Email id"
+            password:
+              blank: "Please Specify a Password"
+            password_confirmation:
+              blank: "Please Specify a Password Confirmation"
+              confirmation: "ile şifre alanları eşleşmiyor!"
+            first_name:
+              blank: "Please Specify First Name"
+            last_name:
+              blank: "Please Specify Last Name"

@@ -5,11 +5,11 @@
     <!-- Sidebar -->
     <aside id="sidebar" data-panel-target="sidebar">
         <div class="h-100 bg-primary">
-            <div class="sidebar-logo">
+            <div class="sidebar-logo text-center py-3">
                 <%= link_to("Admin panel",panel_path)%>
             </div>
             <!-- Sidebar Navigation -->
-            <ul class="sidebar-nav">
+            <ul class="sidebar-nav pt-2">
                 <li class="sidebar-header">
                     Düzenlemeler
                 </li>
@@ -17,6 +17,12 @@
                     <%= link_to(edit_aboutme_path,class:"sidebar-link") do%>
                         <i class="fa-solid fa-list pe-2"></i>
                         Hakkımda düzenle
+                    <%end%>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to(edit_communication_path,class:"sidebar-link") do%>
+                        <i class="fa-solid fa-list pe-2"></i>
+                        İletişim düzenle
                     <%end%>
                 </li>
                 <li class="sidebar-item">
@@ -29,6 +35,18 @@
                     <%= link_to(articles_path,class:"sidebar-link") do%>
                         <i class="fa-solid fa-list pe-2"></i>
                         Yazılarım
+                    <%end%>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to(categories_path,class:"sidebar-link") do%>
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Kategoriler
+                    <%end%>
+                </li>
+                <li class="sidebar-item">
+                    <%= link_to(tags_path,class:"sidebar-link") do%>
+                        <i class="fa-solid fa-list pe-2"></i>
+                        Etiketler
                     <%end%>
                 </li>
                 <li class="sidebar-item">
@@ -84,13 +102,23 @@
     </aside>
     <!-- Main Component -->
     <div class="main">
-        <nav class="navbar navbar-expand px-3 border-bottom">
+        <nav class="navbar navbar-expand px-3 py-3 border-bottom">
             <!-- Button for sidebar toggle -->
             <button class="btn bg-light-subtle" type="button" data-bs-theme="dark" data-action="click->panel#changeVisibility">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
-        <main class="content px-3 py-2">
+        <main class="content px-3 py-2 border-top border-primary">
+            <% unless flash.empty?%>
+                <% type = case flash.first.first
+                when "notice" then "success"
+                when "alert" then "danger"
+                when "info" then "info"
+                when "warning" then "warning"
+                end
+                %>
+                <div class="alert alert-<%= type%> text-center"><%= flash.first.last.capitalize%></div>
+            <%end%>
             <%= yield %>
         </main>
     </div>

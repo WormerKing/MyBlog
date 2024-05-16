@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
 	private
 	def set_layout
-		if ["aboutme","admins","articles","projects"].include?(controller_name)
+		if ["aboutme","admins","articles","projects","communication","tags","categories"].include?(controller_name)
 			"panel"
 		else
 			"application"

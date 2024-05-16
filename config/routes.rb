@@ -16,6 +16,8 @@ Rails.application.routes.draw do
 
 
     # Admin panel rotaları
+    #FIXME buralar normal olarakda açılıyor!
+    #FIXME scope :panel,module:"panel",path_names:{new:"yeni",edit:"duzenle"} do
     scope :panel,path_names:{new:"yeni",edit:"duzenle"} do
         get "/",to: "panel#index",as: :panel
         resource :aboutme,except: %i[ new create destroy ],path: "hakkimda",controller: "aboutme"

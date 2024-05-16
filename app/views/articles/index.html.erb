@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 pt-4">
+			<% if @articles.empty?%>
+				<h1 class="text-center pt-3">Yeni bir yazı oluşturun</h1>
+				<div class="d-flex justify-content-center pt-4">
+					<%= link_to("Yeni yazı",new_article_path,class:"btn btn-warning")%>
+				</div>
+	    	<% else %>
+	    		<div class="d-flex justify-content-center pb-4">
+					<%= link_to("Yeni yazı",new_article_path,class:"btn btn-warning")%>
+				</div>
+				<table class="table table-bordered border-primary text-center">
+				 	<thead class="table-info">
+				    	<tr>
+				      		<th scope="col">id</th>
+				      		<th scope="col">Title</th>
+				      		<th scope="col">Header</th>
+				      		<th scope="col">Category</th>
+				      		<th scope="col">Tags</th>
+				      		<th class="col">Actions</th>
+				    	</tr>
+				  	</thead>
+				  	<tbody class="table-success">
+				    	<% @articles.each do |article|%>
+					    	<tr>
+					    		<th scope="row"><%= article.id%></th>
+					    		<td><%= article.title%></td>
+					    		<td><%= article.header%></td>
+					    		<td><%= article.category.name%></td>
+					    		<td><%= article.tags.pluck(:title).join(",")%></td>
+					    		<td>
+					    			<%= link_to("Düzenle",edit_article_path(article),class:"btn btn-warning")%>
+					    			<%= link_to("Sil",article,class:"btn btn-danger",data: {"turbo-method" => :delete,"turbo-confirm" => "Bu kayıt silinsin mi"})%>
+					    		</td>
+					    	</tr>
+				    	<% end %>
+				  	</tbody>
+				</table>
+			<% end %>
+		</div>
+	</div>
+</div>

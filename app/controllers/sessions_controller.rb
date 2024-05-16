@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
 	end
 
 	def signed_admin?
-		redirect_to("/") if signed_in?
+		redirect_to(panel_path) if signed_in?
 	end
 	def get_login_errors
 

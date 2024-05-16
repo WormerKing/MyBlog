@@ -1,0 +1,43 @@
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 pt-4">
+			<% if @admins.empty?%>
+				<h1 class="text-center pt-3">Yeni bir yönetici oluşturun</h1>
+				<div class="d-flex justify-content-center pt-4">
+					<%= link_to("Yeni yönetici",new_admin_path,class:"btn btn-warning")%>
+				</div>
+	    	<% else %>
+	    		<div class="d-flex justify-content-center pb-4">
+					<%= link_to("Yeni yönetici",new_admin_path,class:"btn btn-warning")%>
+				</div>
+				<table class="table table-bordered border-primary text-center">
+				 	<thead class="table-info">
+				    	<tr>
+				      		<th scope="col">id</th>
+				      		<th scope="col">FirstName</th>
+				      		<th scope="col">LastName</th>
+				      		<th scope="col">Username</th>
+				      		<th scope="col">Email</th>
+				      		<th class="col">Actions</th>
+				    	</tr>
+				  	</thead>
+				  	<tbody class="table-success">
+				    	<% @admins.each do |admin|%>
+					    	<tr>
+					    		<th scope="row"><%= admin.id%></th>
+					    		<td><%= admin.firstname%></td>
+					    		<td><%= admin.lastname%></td>
+					    		<td><%= admin.username%></td>
+					    		<td><%= admin.email%></td>
+					    		<td>
+					    			<%= link_to("Düzenle",edit_admin_path(admin),class:"btn btn-warning")%>
+					    			<%= link_to("Sil",admin,class:"btn btn-danger",data: {"turbo-method" => :delete,"turbo-confirm" => "Bu kayıt silinsin mi"})%>
+					    		</td>
+					    	</tr>
+				    	<% end %>
+				  	</tbody>
+				</table>
+			<% end %>
+		</div>
+	</div>
+</div>

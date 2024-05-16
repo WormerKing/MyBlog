@@ -1,0 +1,31 @@
+<%= stylesheet_link_tag "new_project", "data-turbo-track": "reload" %>
+<div class="pt-5 area vh-25">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
+				<div class="border border-success rounded-2 bg-primary-subtle tasiyici">
+					<%= form_for(@tag,method: "post",class:"form-floating") do |form|%>
+						<div class="row">
+							<h4 class="pt-4 ps-5 text-dark">Etiket Ekle</h4>
+						</div>
+						<hr class="border border-dark">
+						<div class="row mx-3">
+							<div class="col-sm-12 pt-2 text-start">
+								<div class="form-floating">
+									<%= form.text_field(:title,class:"form-control",id:"floatingTitle",required:"")%>
+								  	<%= form.label :title,for: "floatingTitle"%>
+								  	<%= print_error_messages(@tag,:title)%>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 d-flex justify-content-center mb-3">
+								<input type="submit" value="Ekle" class="btn btn-primary mt-4">
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

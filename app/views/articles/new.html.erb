@@ -1,0 +1,61 @@
+<%= stylesheet_link_tag "slimselect", "data-turbo-track": "reload" %>
+<%= stylesheet_link_tag "new_project", "data-turbo-track": "reload" %>
+<div class="pt-5 area vh-75">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
+				<div class="border border-success rounded-2 bg-primary-subtle tasiyici">
+					<%= form_for(@article,method: "post",class:"form-floating") do |form|%>
+						<div class="row">
+							<h4 class="pt-4 ps-5 text-dark">Yazı Ekle</h4>
+						</div>
+						<div class="row mx-3">
+							<div class="col-sm-6 py-2 text-start">
+								<div class="form-floating">
+									<%= form.text_field(:title,class:"form-control form-control-lg",id:"floatingTitle",required:"")%>
+								  	<%= form.label :title,for: "floatingTitle"%>
+								  	<%= print_error_messages(@article,:title)%>
+								</div>
+							</div>
+							<div class="col-sm-6 py-2 text-start">
+								<div class="form-floating">
+									<%= form.text_field :header,class:"form-control form-control-lg",id:"floatingHeader",required:"" %>
+								  	<%= form.label :header,for: "floatingHeader"%>
+								  	<%= print_error_messages(@article,:header)%>
+								</div>
+							</div>
+						</div>
+						<div class="row pt-3 mx-3">
+							<div class="col-sm-12 py-2">
+								<div class="form-floating">
+  									<%= form.text_area(:body,class:"form-control",id:"floatingTextarea",required:"")%>
+  									<%= form.label :body,for: "floatingTextarea"%>
+  									<%= print_error_messages(@article,:body)%>
+								</div>
+							</div>
+						</div>
+						<div class="row pt-3 mx-3">
+							<div class="col-sm-6 py-2">
+								<div class="form-floating">
+								  	<%= form.select(:category, @categories, { include_blank: false },class:"form-select",id:"floatingSelect",aria_label:"Floating label select example") %>
+								  	<label for="floatingSelect">Kategori</label>
+								</div>
+							</div>
+							<div class="col-sm-6 py-3">
+							  	<div id="wormer" data-controller="slimselect">
+									<%= form.select(:tags,@tags,{include_blank: false},class:"form-control",id:"multiselect",multiple:"","data-slimselect-target" => "selectGroup",required:false)%>
+								</div>	
+							</div>
+						</div>
+						<hr class="border border-secondary">
+						<div class="row">
+							<div class="col-sm-12 d-flex justify-content-center mb-5">
+								<input type="submit" value="Gönder" class="btn btn-primary mt-4">
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
