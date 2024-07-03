@@ -6,19 +6,20 @@ Rails.application.routes.draw do
     # resource :login,controller: "sessions",except: %i[ index show edit update]
 
     # TODO login pathleri resources ile yazılacak
+    # TODO bu kısma isim bulunmalı
+    namespace :pages,path:"" do
+        resources :articles,path: "yazilarim",only: %w[ index show ]
+        resources :projects,path: "projelerim"
+        resources :tags,path: "etiketler",only: %w[ index show ]
+        resources :categories,path: "kategoriler",only: %w[ index show ]
+        #FIXME bu kısımlar çakışıyor
 
+        get "/hakkimda",to: "aboutme#index",as: :hakkimda
+        get "/iletisim",to: "communication#index",as: :iletisim
+    end
 
-    # Anasayfa rotaları
-    get "/hakkimda",to: "aboutme#index",as: :hakkimda
-    get "/projelerim",to: "projects#index",as: :projelerim
-    get "/yazilarim",to: "articles#index",as: :yazilarim
-    get "/iletisim",to: "communication#index",as: :iletisim
-
-
-    # Admin panel rotaları
-    #FIXME buralar normal olarakda açılıyor!
     #FIXME scope :panel,module:"panel",path_names:{new:"yeni",edit:"duzenle"} do
-    scope :panel,path_names:{new:"yeni",edit:"duzenle"} do
+    namespace :panel,as:"",path_names:{new:"yeni",edit:"duzenle"} do
         get "/",to: "panel#index",as: :panel
         resource :aboutme,except: %i[ new create destroy ],path: "hakkimda",controller: "aboutme"
         resource :communication, except: %i[ new create destroy ],path: "iletisim",controller: "communication"

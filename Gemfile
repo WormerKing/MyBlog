@@ -26,6 +26,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+gem "redis"
+
 # Validate telephone number
 gem 'telephone_number', '~> 1.4', '>= 1.4.21'
 

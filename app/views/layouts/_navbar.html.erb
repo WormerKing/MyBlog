@@ -11,13 +11,13 @@
 	<div class="collapse navbar-collapse" id="navbarExample01">
 	  <ul class="navbar-nav me-auto mb-2 mb-lg-0 pl-5">
 		<li class="nav-item active">
-		  <%# link_to("Hakkımda",hakkimda_path,class:"nav-link px-3")%>
+		  <%# link_to("Hakkımda",pages_hakkimda_path,class:"nav-link px-3")%>
 		</li>
 		<li class="nav-item">
-		  <%# link_to("Projelerim",projelerim_path,class:"nav-link px-3")%>
+		  <%# link_to("Projelerim",pages_projects_path,class:"nav-link px-3")%>
 		</li>
 		<li class="nav-item">
-		  <%# link_to("Yazılarım",yazilarim_path,class:"nav-link px-3")%>
+		  <%# link_to("Yazılarım",pages_articles_path,class:"nav-link px-3")%>
 		</li>
 	  </ul>
 
@@ -41,10 +41,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			  <div class="navbar-nav ms-auto fs-6">
-				<%= link_to("Hakkımda",hakkimda_path,class:"nav-link text-dark px-3","aria-current"=>"page")%>
-				<%= link_to("Projelerim",projelerim_path,class:"nav-link text-dark px-3")%>
-				<%= link_to("Yazılarım",yazilarim_path,class:"nav-link text-dark px-3")%>
-				<%= link_to("İletişim",iletisim_path,class:"nav-link text-dark px-3")%>
+				<%= link_to("Hakkımda",pages_hakkimda_path,class:"nav-link text-dark px-3","aria-current"=>"page")%>
+				<%= link_to("Projelerim",pages_projects_path,class:"nav-link text-dark px-3")%>
+				<%= link_to("Yazılarım",pages_articles_path,class:"nav-link text-dark px-3")%>
+				<%= link_to("İletişim",pages_iletisim_path,class:"nav-link text-dark px-3")%>
 				<% if signed_in?%>
 					<%= link_to("Panel",panel_path,class:"nav-link text-dark px-3")%>
 				<% end %>

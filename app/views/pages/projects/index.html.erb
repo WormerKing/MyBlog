@@ -1,0 +1,32 @@
+<div class="bg-warning mt-5 w-100">
+	<div class="container-fluid pt-5 ">
+		<div class="row text-center">
+			<h1>Projelerim</h1>
+		</div>
+		<hr class="border border-dark">
+		<div class="row d-flex justify-content-center">
+			<div class="col-sm-12 my-5">
+				<table class="table table-bordered table-warning w-100 rounded">
+					<thead>
+						<tr>
+							<th scope="col">Başlık</th>
+							<th scope="col">ÖnYazı</th>
+							<th scope="col">Kategori</th>
+							<th scope="col">Proje adresi</th>
+						</tr>
+					</thead>
+					<tbody>
+						<% @projects.each do |project|%>
+							<tr class="table-success">
+								<td><%= link_to(project.title,pages_project_path(project),class:"link-offset-2 link-underline link-underline-opacity-0 link-danger")%></td>
+								<td><%= project.header[0..30]%></td>
+								<td><%= link_to(project.category.name, pages_category_path(project.category.name),class:"link-offset-2 link-underline link-underline-opacity-0")%></td>
+								<td><%= link_to("Project Url",project.url,class:"btn btn-success")%></td>
+							</tr>
+						<% end%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

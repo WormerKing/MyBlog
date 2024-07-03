@@ -1,0 +1,37 @@
+<div class="bg-warning mt-5 w-100">
+	<div class="container-fluid pt-5 ">
+		<div class="row text-center">
+			<h1>Yazılarım</h1>
+		</div>
+		<hr class="border border-dark">
+		<div class="row d-flex justify-content-center">
+			<div class="col-sm-12 my-5">
+				<table class="table table-bordered table-warning w-100 rounded">
+					<thead>
+						<tr>
+							<th scope="col">Başlık</th>
+							<th scope="col">ÖnYazı</th>
+							<th scope="col">Kategori</th>
+							<td scope="col">Etiketler</td>
+						</tr>
+					</thead>
+					<tbody>
+						<% @articles.each do |article|%>
+							<tr class="table-success">
+								<td><%= link_to(article.title,pages_article_path(article),class:"link-offset-2 link-underline link-underline-opacity-0 link-danger")%></td>
+								<td><%= article.header[0..30]%></td>
+								<td><%= link_to(article.category.name, pages_category_path(article.category.name),class:"link-offset-2 link-underline link-underline-opacity-0")%></td>
+								<td>
+									<% article.tags.pluck(:title).each do |tag|%>
+										<%= link_to(tag,pages_tag_path(tag),class:"link-offset-2 link-underline link-underline-opacity-0")%>
+										<span>|</span>
+									<% end%>
+								</td>
+							</tr>
+						<% end%>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
