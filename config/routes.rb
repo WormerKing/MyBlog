@@ -3,22 +3,15 @@ Rails.application.routes.draw do
     post "/login",to: "sessions#create",as: :login_post
     delete "/logout",to: "sessions#destroy",as: :logout
 
-    # resource :login,controller: "sessions",except: %i[ index show edit update]
-
-    # TODO login pathleri resources ile yazılacak
-    # TODO bu kısma isim bulunmalı
     namespace :pages,path:"" do
         resources :articles,path: "yazilarim",only: %w[ index show ]
         resources :projects,path: "projelerim"
         resources :tags,path: "etiketler",only: %w[ index show ]
         resources :categories,path: "kategoriler",only: %w[ index show ]
-        #FIXME bu kısımlar çakışıyor
-
-        get "/hakkimda",to: "aboutme#index",as: :hakkimda
-        get "/iletisim",to: "communication#index",as: :iletisim
+        get "/hakkimda",to: "aboutme#index",as: :aboutme
+        get "/iletisim",to: "communication#index",as: :communication
     end
 
-    #FIXME scope :panel,module:"panel",path_names:{new:"yeni",edit:"duzenle"} do
     namespace :panel,as:"",path_names:{new:"yeni",edit:"duzenle"} do
         get "/",to: "panel#index",as: :panel
         resource :aboutme,except: %i[ new create destroy ],path: "hakkimda",controller: "aboutme"
@@ -35,4 +28,5 @@ Rails.application.routes.draw do
     # resources :projects
     # resources :admins
     root "main#index"
+    # bu bir denemedir
 end

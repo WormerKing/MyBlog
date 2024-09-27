@@ -1,6 +1,6 @@
 module Pages
 	class ApplicationController < ActionController::Base
-		before_action :redirect_if_unsigned
+		# before_action :redirect_if_unsigned
 		layout "application"
 
 		def current_admin

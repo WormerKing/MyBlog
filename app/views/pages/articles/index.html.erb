@@ -20,7 +20,7 @@
 							<tr class="table-success">
 								<td><%= link_to(article.title,pages_article_path(article),class:"link-offset-2 link-underline link-underline-opacity-0 link-danger")%></td>
 								<td><%= article.header[0..30]%></td>
-								<td><%= link_to(article.category.name, pages_category_path(article.category.name),class:"link-offset-2 link-underline link-underline-opacity-0")%></td>
+								<td><%= link_to(article.category.name, pages_category_path(article.category.name.downcase.gsub(" ","+")),class:"link-offset-2 link-underline link-underline-opacity-0")%></td>
 								<td>
 									<% article.tags.pluck(:title).each do |tag|%>
 										<%= link_to(tag,pages_tag_path(tag),class:"link-offset-2 link-underline link-underline-opacity-0")%>

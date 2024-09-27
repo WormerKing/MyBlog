@@ -5,7 +5,7 @@ module Pages
 		end
 
 		def show
-			@project = Project.find(params[:id])
+			@project = Project.find_by(title: params[:id].gsub("+"," "))
 		end
 	end
 end

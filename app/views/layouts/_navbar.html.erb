@@ -41,10 +41,10 @@
 			</button>
 			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			  <div class="navbar-nav ms-auto fs-6">
-				<%= link_to("Hakkımda",pages_hakkimda_path,class:"nav-link text-dark px-3","aria-current"=>"page")%>
+				<%= link_to("Hakkımda",pages_aboutme_path,class:"nav-link text-dark px-3","aria-current"=>"page")%>
 				<%= link_to("Projelerim",pages_projects_path,class:"nav-link text-dark px-3")%>
 				<%= link_to("Yazılarım",pages_articles_path,class:"nav-link text-dark px-3")%>
-				<%= link_to("İletişim",pages_iletisim_path,class:"nav-link text-dark px-3")%>
+				<%= link_to("İletişim",pages_communication_path,class:"nav-link text-dark px-3")%>
 				<% if signed_in?%>
 					<%= link_to("Panel",panel_path,class:"nav-link text-dark px-3")%>
 				<% end %>

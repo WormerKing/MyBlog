@@ -26,22 +26,39 @@
 #     en:
 #       "yes": yup
 #       enabled: "ON"
-en:
+tr:
+  username: "Kullanıcı Adı"
+  firstname: "İsim"
+  lastname: "Soyisim"
+  password: "Şifre"
+  password_confirmation: "Şifre Tekrarı"
+  title: "Başlık"
+  header: "Üst bilgi"
+  body: "Gövde"
+  name: "İsim"
+  telephone_number: "Telefon Numarası"
+  email: "E-posta"
+  github: "Github"
+  
   activerecord:
+    attributes:
+      admin:
+        email: "E-posta"
+        password: "Şifre"
+        password_confirmation: "Şifre tekrarı"
+        firstname: "İsim"
+        lastname: "Soyisim"
+        username: "Kullanıcı adı"
     errors:
       models:
         admin:
           attributes:
             email:
-              blank: "Please Specify an Email id"
-              taken: "Please use a different Email id"
-              invalid: "Please Specify a valid Email id"
+              blank: "alanı boş olamaz"
+              taken: "alanında daha önce bu mail kullanılmış!"
+              invalid: "alanı geçerli bir mail adresi değil"
             password:
-              blank: "Please Specify a Password"
+              blank: "alanının girinilmesi zorunludur!"
             password_confirmation:
-              blank: "Please Specify a Password Confirmation"
+              blank: "alanını giriniz!"
               confirmation: "ile şifre alanları eşleşmiyor!"
-            first_name:
-              blank: "Please Specify First Name"
-            last_name:
-              blank: "Please Specify Last Name"

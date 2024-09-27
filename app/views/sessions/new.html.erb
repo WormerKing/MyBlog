@@ -2,35 +2,50 @@
 <div class="pt-5 area vh-100">
 	<div class="container pt-5">
 		<div class="row">
-			<div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
+			<div class="col-sm-12 rounded-3 d-flex flex-column justify-content-center align-items-center">
 				<div class="border border-dark my-5 rounded-2 bg-primary-subtle tasiyici">
-					<%= form_with(url: login_post_path,method: "post",scope:"admin") do |form|%>
-						<div class="row">
+					<%= form_with(url: login_post_path,method: "post",scope:"admin",class:"form-floating") do |form|%>
+						<div class="row py-3">
 							<h2 class="text-center pt-4 text-dark">Admin Girişi</h2>
 						</div>
 						<div class="row mx-3">
 							<div class="col-sm-12 py-2 text-start">
-								<%= form.text_field("username",class:"form-control fs-4",placeholder:"Kullanıcı adı",required:"")%>
-							</div>
+                <%= form.text_field("username_or_email",class:"form-control fs-4 #{'is-invalid' if flash[:username_or_email_error]}",placeholder:"Kullanıcı adı ya da eposta",required:"",value:"#{flash[:before_username_or_password] ? flash[:before_username_or_password] : ''}")%>
+                <%= print_session_error_messages(flash[:username_or_email_error]) if flash[:username_or_email_error]%>
+              </div>
 						</div>
 						<div class="row pt-3 mx-3">
-							<div class="col-sm-12 py-2">
-								<%= form.email_field("email",class:"form-control fs-4",placeholder:"Eposta",required:"")%>
-							</div>
+              <div class="col-sm-12 py-2 input-group">
+                <%= form.password_field("password",id:"password",class:"form-control fs-4 #{flash[:password_error] ? 'is-invalid' : ''}",placeholder:"Şifre",required:"") %>
+                <div class="input-group-text">
+                  <input class="form-check-input mt-0" id="checkbox" type="checkbox" value="Şifreyi göster" aria-label="Checkbox for following text input">
+                </div>
+
+                <%= print_session_error_messages(flash[:password_error]) if flash[:password_error]%>
+              </div>
 						</div>
-						<div class="row pt-3 mx-3">
-							<div class="col-sm-12 py-2">
-								<%= form.password_field("password",class:"form-control fs-4",placeholder:"Şifre",required:"")%>
-							</div>
-						</div>
-						<div class="row">
+						<div class="row py-5">
 							<div class="col-sm-12 d-flex justify-content-center">
-								<input type="submit" value="Gönder" class="btn btn-primary mt-4">
+								<!--input type="submit" value="Gönder" class="btn btn-primary fs-4"-->
+								<%= form.submit(value:"Giriş Yap",class:"btn btn-primary fs-4")%>
 							</div>
 						</div>
-					<% end%>
+					<% end %>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+<%#TODO buradaki javascript kodu stimulus ile yazılacak%>
+<script>
+  var password = document.getElementById("password");
+  var checkbox = document.getElementById("checkbox");
+
+  checkbox.addEventListener("click",() => {
+    if (checkbox.checked) {
+      password.type = "text";
+    } else {
+      password.type = "password";
+    }
+  });
+</script>

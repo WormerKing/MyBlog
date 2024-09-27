@@ -6,6 +6,7 @@ class Admin < ApplicationRecord
 	validates :firstname, length: {in:3..10,too_short:"kısmı en az %{count} karakter olmalıdır!",
 		too_long:"kısmı en fazla %{count} karakter olabilir!"}
 
+
 	validates :lastname,length: {in:3..20,too_short:"kısmı en az %{count} karakter olmalıdır!",
 		too_long:"kısmı en fazla %{count} karakter olabilir!"}
 
@@ -18,10 +19,11 @@ class Admin < ApplicationRecord
 		email: {message:"kısmı geçerli bir eposta adresi değil!"},
 		uniqueness: {case_sensitive: false,message: "kısmı eşsiz olmalıdır!"}
 
-	validates :password,length: {in:5..100,too_short:"kısmı en az %{count} karakter olmalıdır!",
-		too_long:"kısmı en fazla %{count} karakter olabilir!"},:on => :create# ,confirmation: true
-
-	#TODO bcrypt galiba confirmation ekliyor ?
+	validates :password,length: {
+			in:5..100,
+			too_short:"kısmı en az %{count} karakter olmalıdır!",
+			too_long:"kısmı en fazla %{count} karakter olabilir!"
+		},:on => :create # ,confirmation: {case_sensitive: false}
 
 	validates :password_confirmation, presence: {message:"kısmı boş olamaz!"},:on => :create
 

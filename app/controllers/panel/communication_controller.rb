@@ -19,7 +19,6 @@ module Panel
 				render :edit,status: 422
 			end
 		end
-		#TODO bu kısmı ekle
 		private
 		def select_communication
 			@communication = Communication.first

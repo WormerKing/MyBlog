@@ -20,6 +20,8 @@ module TuncayDinlerBlog
       html_tag.gsub("form-control","form-control is-invalid").html_safe
     }
 
+    config.i18n.default_locale = :tr
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

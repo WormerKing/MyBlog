@@ -19,8 +19,6 @@ module Panel
 			
 			@form_tags = params.require(:project).permit!["tags"].delete_if {|tag| !Tag.exists?(title:tag)}
 			@project.tags = @form_tags.map {|tag| Tag.find_by_title(tag)}
-			#FIXME tag ekleme kısmını düzelt
-
 			
 			if @project.invalid?
 				puts "hata meydana geldi"

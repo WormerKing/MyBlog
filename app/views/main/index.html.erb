@@ -3,7 +3,8 @@
 		<div class="row py-5 ">
 			<div class="col-sm-6 text-start">
 				<h1>Ben kimim ?</h1>
-				<p class="fs-5 pt-4">Lorem ipsum dolor sit amet consectetur, adipisicing, elit. Enim, deserunt.</p>
+				<p class="fs-5 pt-4"><%= @aboutme.body[0..90]%>...</p>
+				<%= link_to("Devamını oku",pages_aboutme_path,class:"link fs-5 rounded rounded-pill btn btn-success text-white my-4")%>
 			</div>
 			<div class="col-sm-5 offset-sm-1">
 				<img src="https://picsum.photos/id/13/1920/1080" alt="" class="w-100 rounded">
@@ -12,147 +13,68 @@
 	</div>
 </div>
 <div class="bg-light">
-	<%# TODO bu kısma son eklenen dört proje eklenecek%>
 	<div class="container pt-5">
 		<div class="row text-center">
 			<h1>Son yaptığım projelerim</h1>
 		</div>
-		<div class="row py-5">
-			<!-- proje ismi-->
-			<!-- proje küçük açıklaması -->
-			<!-- projede kullanılan diller ve teknolojiler-->
-			<!-- proje örnek resmi ?-->
-			<div class="col-sm-5 py-3">
-				<div class="row">
-					<div class="col-6">
-						<h4 class="text-start py-1">MyBlog</h4>
-						<p class="text-start">Bu proje ile birlikte bu sitenin kodlarını yazdım</p>
-						<ul class="list-inline text-center">
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Python</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Ruby</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Erb</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Sass</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Turbo</li>
-						</ul>
+		<% @projects.each do |project|%>
+			<div class="row py-5">
+				<% project.each do |p| %>
+					<div class="col-sm-5 py-3 <%= "offset-sm-2" if project.last == p %>">
+						<div class="row">
+							<div class="col-lg-6 order-last order-lg-first text-sm-center text-lg-start">
+								<h4 class="py-1"><%= link_to(p.title,pages_project_path(string_to_url(p.title)),class:"text-decoration-none text-info")%>
+								</h4>
+								
+								<p>
+									<%= p.header%>
+								</p>
+								
+								<ul class="list-inline">
+									<% p.tags.each do |tag|%>
+										<li class="list-inline-item rounded-pill fs-12 bg-dark p-2 m-1"><%= link_to(tag.title,pages_tag_path(string_to_url(tag.title)),class:"text-decoration-none text-white")%></li>
+									<%end%>
+								</ul>
+								<%= link_to("Proje Bilgileri",pages_project_path(string_to_url(p.title)),class:"btn btn-primary rounded rounded-pill mt-3 text-center")%>
+							</div>
+							<div class="col-lg-5 offset-md-1 order-first order-lg-second f-flex justify-content-center">
+								<img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100 img-thumbnail img-fluid">
+								<%# link_to("Proje Bilgileri",pages_project_path(p.to_url_string),class:" btn btn-primary rounded rounded-pill mt-3 text-center")%>
+							</div>
+						</div>
 					</div>
-					<div class="col-5 offset-sm-1">
-						<img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100">
-					</div>
-				</div>
+				<% end %>
 			</div>
-			<div class="col-sm-5 offset-sm-2 py-3">
-				<div class="row">
-					<div class="col-6">
-						<h4 class="text-start py-1">MyBlog</h4>
-						<p class="text-start">Bu proje ile birlikte bu sitenin kodlarını yazdım</p>
-						<ul class="list-inline text-center">
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Python</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Ruby</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Erb</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Sass</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Turbo</li>
-						</ul>
-					</div>
-					<div class="col-5 offset-sm-1">
-						<img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100 img-thumbnail">
-					</div>
-				</div>
-			</div>
-
-		</div>
-		<div class="row py-5">
-			<!-- proje ismi-->
-			<!-- proje küçük açıklaması -->
-			<!-- projede kullanılan diller ve teknolojiler-->
-			<!-- proje örnek resmi ?-->
-			<div class="col-sm-5 py-3">
-				<div class="row">
-					<div class="col-6">
-						<h4 class="text-start py-1">MyBlog</h4>
-						<p class="text-start">Bu proje ile birlikte bu sitenin kodlarını yazdım</p>
-						<ul class="list-inline text-center">
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Python</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Ruby</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Erb</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Sass</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-secondary text-light">Turbo</li>
-						</ul>
-					</div>
-					<div class="col-5 offset-sm-1">
-						<img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100">
-					</div>
-				</div>
-			</div>
-			<div class="col-sm-5 offset-sm-2 py-3">
-				<div class="row">
-					<div class="col-6">
-						<h4 class="text-start py-1">MyBlog</h4>
-						<p class="text-start">Bu proje ile birlikte bu sitenin kodlarını yazdım</p>
-						<ul class="list-inline text-center">
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Python</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Ruby</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Erb</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Sass</li>
-							<li class="list-inline-item rounded-pill fs-12 bg-dark text-light">Turbo</li>
-						</ul>
-					</div>
-					<div class="col-5 offset-sm-1">
-						<img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100">
-					</div>
-				</div>
-			</div>
-
-		</div>
+		<% end %>
+		
 	</div>
 </div>
 <div class="bg-warning">
 	<div class="container pt-5">
-		<div class="row">
+		<div class="row text-center">
 			<h1>Son blog yazılarım</h1>
 		</div>
-		<div class="row py-5 border-bottom border-dark">
-			<div class="col-sm-5">
-				<h3 class="text-start">Rails nedir</h3>
-				<p class="text-start pt-3">Rails bir mvc kullanan bir frameworktur. daha fazla webte kullanılır</p>
-				<strong class="text-start">Kategori : <a href="" class="text-decoration-none">Yazılım</a></strong>
-				<ul class="list-inline pt-3">
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Web</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Rails</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Ruby</li>
-				</ul>
+		<% @articles.each do |article|%>
+			<div class="row">
+				<% article.each do |a| %>
+					<div class="col-sm-5 my-5 border-bottom text-center text-md-start border-dark <%= 'offset-sm-2' if article.last == a%>">
+						<h3>
+							<%= link_to(a.title,pages_article_path(string_to_url(a.title)),class:" article-title-hover")%>
+						</h3>
+						<p class="pt-3"><%= a.header%></p>
+						<strong class="text-start">Kategori : 
+							<%= link_to(a.category.name,pages_category_path(string_to_url(a.category.name)),class:"text-decoration-none")%>
+						</strong>
+						<ul class="list-inline pt-3">
+							<% a.tags.each do |tag|%>
+								<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary m-1">
+									<%= link_to(tag.title,pages_tag_path(string_to_url(tag.title)),class:"text-decoration-none text-white")%>
+								</li>
+							<% end %>
+						</ul>
+					</div>
+				<% end %>
 			</div>
-			<div class="col-sm-5 offset-sm-2">
-				<h3 class="text-start">Rails nedir</h3>
-				<p class="text-start pt-3">Rails bir mvc kullanan bir frameworktur. daha fazla webte kullanılır</p>
-				<strong class="text-start">Kategori : <a href="" class="text-decoration-none">Yazılım</a></strong>
-				<ul class="list-inline pt-3">
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Web</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Rails</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Ruby</li>
-				</ul>
-			</div>
-		</div>
-		<div class="row py-5">
-			<div class="col-sm-5">
-				<h3 class="text-start">Rails nedir</h3>
-				<p class="text-start pt-3">Rails bir mvc kullanan bir frameworktur. daha fazla webte kullanılır</p>
-				<strong class="text-start">Kategori : <a href="" class="text-decoration-none">Yazılım</a></strong>
-				<ul class="list-inline pt-3">
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Web</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Rails</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Ruby</li>
-				</ul>
-			</div>
-			<div class="col-sm-5 offset-sm-2">
-				<h3 class="text-start">Rails nedir</h3>
-				<p class="text-start pt-3">Rails bir mvc kullanan bir frameworktur. daha fazla webte kullanılır</p>
-				<strong class="text-start">Kategori : <a href="" class="text-decoration-none">Yazılım</a></strong>
-				<ul class="list-inline pt-3">
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Web</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Rails</li>
-					<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary">Ruby</li>
-				</ul>
-			</div>
-		</div>
+		<% end %>
 	</div>
 </div>

@@ -11,7 +11,16 @@ module Panel
 		end
 
 		def create
-			@admin = Admin.new(params.require(:admin).permit(:firstname,:lastname,:username,:email,:password,:password_confirmation))
+			@admin = Admin.new(
+				params.require(:admin).permit(
+					:firstname,
+					:lastname,
+					:username,
+					:email,
+					:password,
+					:password_confirmation
+				)
+			)
 
 			if @admin.valid?
 				if @admin.save
@@ -30,9 +39,6 @@ module Panel
 		def edit
 
 		end
-
-		#FIXME update kısmında sıkıntı çıkıyor
-
 		def update
 			if @admin.update(params.require(:admin).permit(:firstname,:lastname,:username,:email,:password,:password_confirmation))
 				flash[:notice] = "İdsi #{@admin.id} olan kayıt başarıyla güncellendi!"
