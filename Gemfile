@@ -34,6 +34,13 @@ gem 'telephone_number', '~> 1.4', '>= 1.4.21'
 # Validate email
 gem 'email_validator', '~> 2.2', '>= 2.2.4'
 
+
+# Rails bootstrap icons gem
+gem 'bootstrap-icons'
+
+# Bootstrap icons helper
+gem 'bootstrap-icons-helper'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
 

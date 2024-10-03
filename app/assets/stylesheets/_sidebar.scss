@@ -1,0 +1,43 @@
+body {
+  overflow-x: hidden;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: rgba(248, 249, 250, 0.8); /* Şeffaf arka plan */
+  transition: transform 0.3s ease;
+  transform: translateX(0); /* Varsayılan olarak görünür */
+  z-index: 1000;
+  overflow: scroll;
+}
+.sidebar.active {
+  transform: translateX(-100%); /* Gizlendiğinde sola kaydır */
+}
+.container-lg {
+  margin-top: 56px; /* Navbar yüksekliğine göre üstten boşluk */
+  transition: margin-left 0.3s; /* Geçiş efekti */
+}
+@media (min-width: 768px) {
+  .sidebar {
+    background: #f8f9fa; /* Tablet ve üstü için arka plan rengi */
+  }
+  .container-lg {
+    margin-left: 0; /* Varsayılan konum */
+  }
+  .sidebar.active ~ .container-lg {
+    margin-left: 250px; /* Sidebar açıldığında içeriği sağa kaydır */
+  }
+  .sidebar ~ .container-lg {
+    margin-left: 250px; /* Sidebar açıkken içeriği sağa kaydır */
+  }
+}
+
+.tags,
+.categories {
+  max-height: 35%;
+  min-height: 20%;
+  overflow: scroll;
+}

@@ -1,37 +1,17 @@
-<div class="bg-warning mt-5 w-100">
-	<div class="container-fluid pt-5 ">
-		<div class="row text-center">
-			<h1>Yazılarım</h1>
-		</div>
-		<hr class="border border-dark">
-		<div class="row d-flex justify-content-center">
-			<div class="col-sm-12 my-5">
-				<table class="table table-bordered table-warning w-100 rounded">
-					<thead>
-						<tr>
-							<th scope="col">Başlık</th>
-							<th scope="col">ÖnYazı</th>
-							<th scope="col">Kategori</th>
-							<td scope="col">Etiketler</td>
-						</tr>
-					</thead>
-					<tbody>
-						<% @articles.each do |article|%>
-							<tr class="table-success">
-								<td><%= link_to(article.title,pages_article_path(article),class:"link-offset-2 link-underline link-underline-opacity-0 link-danger")%></td>
-								<td><%= article.header[0..30]%></td>
-								<td><%= link_to(article.category.name, pages_category_path(article.category.name.downcase.gsub(" ","+")),class:"link-offset-2 link-underline link-underline-opacity-0")%></td>
-								<td>
-									<% article.tags.pluck(:title).each do |tag|%>
-										<%= link_to(tag,pages_tag_path(tag),class:"link-offset-2 link-underline link-underline-opacity-0")%>
-										<span>|</span>
-									<% end%>
-								</td>
-							</tr>
-						<% end%>
-					</tbody>
-				</table>
-			</div>
-		</div>
-	</div>
+<%= stylesheet_link_tag "_sidebar", "data-turbo-track": "reload" %>
+<%= render "layouts/sidebar"%>
+<div class="container-lg mt-5 pt-5">
+    <h1>Kullanıcı Yazıları</h1>
+    <p>Burada oluşturduğum yazılarım bulunmaktadır</p>
+    <p>Toplam yazı sayısı: <strong><%= @articles.count%></strong></p>
+    <% @articles.each do |article|%>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to(article.title,pages_article_path(string_to_url(article.title)),class:"text-decoration-none text-primary")%>
+          </h5>
+          <p class="card-text"><%= article.header%></p>
+        </div>
+      </div>
+    <%end%>
 </div>

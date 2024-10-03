@@ -58,6 +58,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_211241) do
     t.string "telephone_number"
     t.string "github"
     t.string "email"
+    t.string "linkedin"
+    t.string "instagram"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

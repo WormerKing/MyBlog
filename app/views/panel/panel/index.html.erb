@@ -4,10 +4,11 @@
 <div class="wrapper" data-controller="panel">
     <!-- Sidebar -->
     <aside id="sidebar" data-panel-target="sidebar">
-        <div class="h-100 bg-primary">
+        <div class="h-100 bg-primary position-fixed" style="width:264px;">
             <div class="sidebar-logo text-center py-3">
-                <%= link_to("Admin panel",panel_path)%>
+              <%= link_to("Admin panel",panel_path)%>
             </div>
+            
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav pt-2">
                 <li class="sidebar-header">
@@ -66,7 +67,7 @@
                 </li>
 
                 <li class="sidebar-item pt-2">
-                    <%= link_to("Çıkış yap",logout_path,class:"sidebar-link btn btn-danger",:method => :delete,data:{turbo_method: :delete})%>
+                  <%= link_to("Çıkış yap",logout_path,class:"sidebar-link btn btn-danger",:method => :delete,data:{turbo_method: :delete})%>
                 </li>
 
                 <!-- ####################################################### -->
@@ -102,13 +103,13 @@
     </aside>
     <!-- Main Component -->
     <div class="main">
-        <nav class="navbar navbar-expand px-3 py-3 border-bottom">
+        <nav class="navbar navbar-expand px-3 py-3 border-bottom position-fixed w-100 bg-success">
             <!-- Button for sidebar toggle -->
             <button class="btn bg-light-subtle" type="button" data-bs-theme="dark" data-action="click->panel#changeVisibility">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
-        <main class="content px-3 py-2 border-top border-primary">
+        <main class="content px-3 py-5 mt-5 border-top border-primary">
             <% unless flash.empty?%>
                 <% type = case flash.first.first
                 when "notice" then "success"

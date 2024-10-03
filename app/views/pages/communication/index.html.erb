@@ -1,10 +1,35 @@
-<!--div class="container-fluid mt-5 pt-5 bg-warning">
-	<div class="row">
-		<div class="col-sm-6 bg-danger order-last order-md-first">
-			<h1>İlk</h1>
-		</div>
-		<div class="col-sm-6 bg-info order-first order-md-last">
-			<h1>Son</h1>
-		</div>
-	</div>
-</div-->
+<div class="container pt-5 mt-5">
+  <div class="card mb-3"> 
+    <div class="row g-0">
+      <div class="col-md-6">
+        <%= image_tag("my_photo.jpg",class:"img-fluid rounded-start",alt:"My Profile Photo")%>
+      </div>
+      <div class="col-md-6 d-flex align-items-center">
+        <div class="card-body h-100">
+          <h5 class="card-title text-center fs-1">İletişim Bilgilerim</h5>
+          <hr>
+          <p class="fs-5 text-danger text-center">İletişim bilgilerime aşağıdan ulaşabilirsiniz</p>
+          <div class="information d-flex justify-content-center">
+            <div class="links wh-100">
+              <%= link_to(@communication.github,class:"mx-2") do %>
+                <%= bootstrap_icon("github",witdh:50,height: 50,color: "gray")%>
+              <% end %>
+              <%= link_to("tel:#{@communication.telephone_number}",class:"mx-2") do %>
+                <%= bootstrap_icon("telephone-fill",witdh:50,height: 50,color: "gray")%>
+              <% end %>
+              <%= link_to("mailto:#{@communication.email}",class:"mx-2") do %>
+                <%= bootstrap_icon("envelope",witdh:50,height: 50,color: "gray")%>
+              <% end %>
+              <%= link_to(@communication.linkedin,class:"mx-2") do %>
+                <%= bootstrap_icon("linkedin",witdh:50,height: 50,color: "gray")%>
+              <% end %>
+              <%= link_to(@communication.instagram,class:"mx-2") do %>
+                <%= bootstrap_icon("instagram",witdh:50,height: 50,color: "gray")%>
+              <% end %> 
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>
+
