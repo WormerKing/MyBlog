@@ -10,7 +10,7 @@ class Article < ApplicationRecord
 
   validates :header,
             length: {
-              in: 10..100,
+              in: 10..1000,
               too_short: 'kısmı en az %<count>s karakter olmalıdır!',
               too_long: 'kısmı en fazla %<count>s karakter uzunluğunda olabilir!'
             }

@@ -1,4 +1,3 @@
-<%= stylesheet_link_tag "_sidebar", "data-turbo-track": "reload" %>
 <%= render "layouts/sidebar"%>
 <div class="container-lg mt-5 pt-5">
     <h1>Kullanıcı Yazıları</h1>
@@ -8,7 +7,11 @@
       <div class="card mb-3">
         <div class="card-body">
           <h5 class="card-title">
-            <%= link_to(article.title,pages_article_path(string_to_url(article.title)),class:"text-decoration-none text-primary")%>
+            <%= link_to(
+              article.title,
+              pages_article_path(string_to_url(article.title)),
+              class:"text-decoration-none text-danger text-capitalize")
+            %>
           </h5>
           <p class="card-text"><%= article.header%></p>
         </div>

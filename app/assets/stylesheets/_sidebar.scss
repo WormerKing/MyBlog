@@ -20,7 +20,7 @@ body {
   margin-top: 56px; /* Navbar yüksekliğine göre üstten boşluk */
   transition: margin-left 0.3s; /* Geçiş efekti */
 }
-@media (min-width: 768px) {
+@media (min-width: 1400px) {
   .sidebar {
     background: #f8f9fa; /* Tablet ve üstü için arka plan rengi */
   }

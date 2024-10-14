@@ -33,6 +33,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_211241) do
     t.string "title"
     t.string "header"
     t.text "body"
+    t.integer "view_count", default: 0
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -69,6 +70,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_02_211241) do
     t.string "header"
     t.text "body"
     t.string "url"
+    t.integer "view_count", default: 0
     t.date "start_date"
     t.date "end_date"
     t.integer "category_id", null: false

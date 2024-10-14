@@ -6,6 +6,6 @@ class ApplicationRecord < ActiveRecord::Base
   def reorganize_title
     return raise ArgumentError unless title
 
-    self.title = title.split(' ').map(&:capitalize).join(' ')
+    self.title = title.split(' ').map(&:downcase).join(' ')
   end
 end

@@ -12,7 +12,6 @@ module Panel
     end
 
     def update
-      # TODO: iletişim kısmına instagram ve linkedin eklendi, onları forma yerleştir
       if @communication.update(params.require(:communication).permit!)
         flash[:notice] = 'İletişim kısmı başarıyla güncellendi'
         redirect_to(panel_path)
@@ -29,4 +28,3 @@ module Panel
     end
   end
 end
-

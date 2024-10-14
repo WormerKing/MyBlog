@@ -122,7 +122,7 @@ GEM
       activesupport (>= 6.1)
     i18n (1.14.6)
       concurrent-ruby (~> 1.0)
-    importmap-rails (2.0.1)
+    importmap-rails (2.0.2)
       actionpack (>= 6.0.0)
       activesupport (>= 6.0.0)
       railties (>= 6.0.0)
@@ -150,7 +150,7 @@ GEM
     matrix (0.4.2)
     mini_mime (1.1.5)
     minitest (5.25.1)
-    msgpack (1.7.2)
+    msgpack (1.7.3)
     mutex_m (0.2.0)
     net-imap (0.4.16)
       date
@@ -254,6 +254,7 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
+    unicode_utils (1.4.0)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -298,6 +299,7 @@ DEPENDENCIES
   telephone_number (~> 1.4, >= 1.4.21)
   turbo-rails
   tzinfo-data
+  unicode_utils (~> 1.4)
   validate_url (~> 1.0, >= 1.0.15)
   web-console
 

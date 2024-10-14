@@ -17,21 +17,37 @@
 							</div>
 							<div class="col-sm-6 py-2 text-start">
 								<div class="form-floating">
-									<%= form.url_field :github,class:"form-control form-control-lg",id:"floatingHeader",required:"" %>
+									  <%= form.url_field :github,class:"form-control form-control-lg",id:"floatingHeader",required:"" %>
 								  	<%= form.label :github,for: "floatingHeader"%>
 								  	<%= print_error_messages(@communication,:github)%>
 								</div>
 							</div>
 						</div>
 						<div class="row pt-3 mx-3">
-							<div class="col-sm-12">
+							<div class="col-sm-6">
 								<div class="form-floating">
   									<%= form.telephone_field(:telephone_number,class:"form-control",id:"floatingTextarea",required:"")%>
   									<%= form.label :telephone_number,for: "floatingTextarea"%>
   									<%= print_error_messages(@communication,:telephone_number)%>
 								</div>
-							</div>
-						</div>
+              </div>
+              <div class="col-sm-6">
+								<div class="form-floating">
+  									<%= form.url_field(:instagram,class:"form-control",id:"floatingInstagram",required:"")%>
+  									<%= form.label :instagram,for: "floatingInstagram"%>
+  									<%= print_error_messages(@communication,:instagram)%>
+								</div>
+              </div>
+            </div>
+            <div class="row pt-3 mx-3">
+              <div class="col-sm-12">
+                <div class="form-floating">
+                  <%= form.url_field(:linkedin,class:"form-control",id:"floatingLinkedin",required: "")%>
+                  <%= form.label :linkedin,for: "floatingLinkedin"%>
+                  <%= print_error_messages(@communication,:linkedin)%>
+                </div>
+              </div>
+            </div>
 						<hr class="border border-secondary">
 						<div class="row">
 							<div class="col-sm-12 d-flex justify-content-center mb-4">

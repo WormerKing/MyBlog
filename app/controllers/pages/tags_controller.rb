@@ -1,16 +1,15 @@
 module Pages
-	class TagsController < ApplicationController
-		def index
-			
-		end
+  class TagsController < ApplicationController
+    before_action :select_tag, only: %i[show]
 
-		def show
+    def show
+      puts params[:id]
+    end
 
-		end
+    private
 
-		private
-		def select_tag
-			@tag = Params.find_by(name: params[:id])
-		end
-	end
+    def select_tag
+      @tag = Tag.find_by(title: decode_url(params[:id]))
+    end
+  end
 end

@@ -1,0 +1,43 @@
+<%= render "layouts/sidebar"%>
+<div class="container-lg mt-5 pt-5 text-capitalize">
+    <h1><%= @tag.title%> <span class="text-lowercase">etiketine ait içerikler</span></h1>
+    <p><%= @tag.title%> kategorisinde bulunan projeler ve yazılar burada listelenmektedir.</p>
+    <p>Toplam proje sayısı: <strong><%= @tag.projects.count%></strong></p>
+    <p>Toplam yazı sayısı: <strong><%= @tag.articles.count%></strong></p>
+    <% if @tag.projects.count != 0%>
+      <h2 class="text-capitalize text-center"><%= @tag.title%> Projeleri</h2>
+    <% end %>
+    <% @tag.projects.each do |project|%>
+      <hr>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to(
+              project.title,
+              pages_project_path(string_to_url(project.title)),
+              class:"text-decoration-none text-capitalize"
+            )%>
+          </h5>
+          <p class="card-text"><%= project.header%></p>
+        </div>
+      </div>
+    <%end%>
+    <% if @tag.articles.count != 0%>
+      <h2 class="text-capitalize text-center text-danger"><%= @tag.title%> yazıları</h2>
+    <% end %>
+    <% @tag.articles.each do |article|%>
+      <hr>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to(
+              article.title,
+              pages_article_path(string_to_url(article.title)),
+              class:"text-decoration-none text-capitalize text-danger"
+            )%>
+          </h5>
+          <p class="card-text"><%= article.header%></p>
+        </div>
+      </div>
+    <%end%> 
+</div>

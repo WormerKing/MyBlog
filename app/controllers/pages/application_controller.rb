@@ -20,10 +20,10 @@ module Pages
     end
 
     def decode_url(url)
-      url.split('+').map(&:capitalize).join(' ')
+      # url.split('+').map { |i| UnicodeUtils.titlecase(i, :tr) }.join(' ')
+      url.split('+').map(&:downcase).join(' ')
     end
 
     helper_method :signed_in?, :current_admin, :redirect_if_unsigned
   end
 end
-

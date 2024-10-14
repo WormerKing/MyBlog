@@ -1,0 +1,43 @@
+<%= render "layouts/sidebar"%>
+<div class="container-lg mt-5 pt-5 text-capitalize">
+    <h1><%= @category.name%> <span class="text-lowercase">kategorisine ait içerikler</span></h1>
+    <p><%= @category.name%> kategorisinde bulunan projeler ve yazılar burada listelenmektedir.</p>
+    <p>Toplam proje sayısı: <strong><%= @category.projects.count%></strong></p>
+    <p>Toplam yazı sayısı: <strong><%= @category.articles.count%></strong></p>
+    <% if @category.projects.count != 0%>
+      <h2 class="text-capitalize text-center"><%= @category.name%> Projeleri</h2>
+    <% end %>
+    <% @category.projects.each do |project|%>
+      <hr>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to(
+              project.title,
+              pages_project_path(string_to_url(project.title)),
+              class:"text-decoration-none text-capitalize"
+            )%>
+          </h5>
+          <p class="card-text"><%= project.header%></p>
+        </div>
+      </div>
+    <%end%>
+    <% if @category.articles.count != 0%>
+      <h2 class="text-capitalize text-center text-danger"><%= @category.name%> yazıları</h2>
+    <% end %>
+    <% @category.articles.each do |article|%>
+      <hr>
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= link_to(
+              article.title,
+              pages_article_path(string_to_url(article.title)),
+              class:"text-decoration-none text-capitalize text-danger"
+            )%>
+          </h5>
+          <p class="card-text"><%= article.header%></p>
+        </div>
+      </div>
+    <%end%> 
+</div>

@@ -1,6 +1,9 @@
 if %w[development test].include?(Rails.env)
   50.times do
-    Tag.create(title: Faker::ProgrammingLanguage.unique.name)
+    title = Faker::ProgrammingLanguage.unique.name
+    next if title.include?('+')
+
+    Tag.create(title:)
   end
 
   Admin.create(
@@ -55,4 +58,3 @@ if %w[development test].include?(Rails.env)
     )
   end
 end
-

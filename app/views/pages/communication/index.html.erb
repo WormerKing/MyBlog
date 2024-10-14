@@ -2,7 +2,7 @@
   <div class="card mb-3"> 
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag("my_photo.jpg",class:"img-fluid rounded-start",alt:"My Profile Photo")%>
+        <%= image_tag("https://picsum.photos/id/237/1920/1080",class:"img-fluid rounded-start",alt:"My Profile Photo")%>
       </div>
       <div class="col-md-6 d-flex align-items-center">
         <div class="card-body h-100">
@@ -11,19 +11,19 @@
           <p class="fs-5 text-danger text-center">İletişim bilgilerime aşağıdan ulaşabilirsiniz</p>
           <div class="information d-flex justify-content-center">
             <div class="links wh-100">
-              <%= link_to(@communication.github,class:"mx-2") do %>
+              <%= link_to(@communication.github,class:"mx-2",target:"blank") do %>
                 <%= bootstrap_icon("github",witdh:50,height: 50,color: "gray")%>
               <% end %>
-              <%= link_to("tel:#{@communication.telephone_number}",class:"mx-2") do %>
+              <%= link_to("tel:#{@communication.telephone_number}",class:"mx-2",target:"blank") do %>
                 <%= bootstrap_icon("telephone-fill",witdh:50,height: 50,color: "gray")%>
               <% end %>
-              <%= link_to("mailto:#{@communication.email}",class:"mx-2") do %>
+              <%= link_to("mailto:#{@communication.email}",class:"mx-2",target:"blank") do %>
                 <%= bootstrap_icon("envelope",witdh:50,height: 50,color: "gray")%>
               <% end %>
-              <%= link_to(@communication.linkedin,class:"mx-2") do %>
+              <%= link_to(@communication.linkedin,class:"mx-2",target:"blank") do %>
                 <%= bootstrap_icon("linkedin",witdh:50,height: 50,color: "gray")%>
               <% end %>
-              <%= link_to(@communication.instagram,class:"mx-2") do %>
+              <%= link_to(@communication.instagram,class:"mx-2",target:"blank") do %>
                 <%= bootstrap_icon("instagram",witdh:50,height: 50,color: "gray")%>
               <% end %> 
             </div>
@@ -32,4 +32,3 @@
     </div>
   </div>
 </div>
-

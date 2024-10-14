@@ -4,6 +4,7 @@ class CreateArticles < ActiveRecord::Migration[7.1]
       t.string :title
       t.string :header
       t.text :body
+      t.integer :view_count, default: 0
       t.belongs_to :category, null: false, foreign_key: true
 
       t.timestamps

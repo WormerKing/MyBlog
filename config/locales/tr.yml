@@ -39,7 +39,23 @@ tr:
   telephone_number: "Telefon Numarası"
   email: "E-posta"
   github: "Github"
-  
+
+  # Ay ayarları
+  january: "Ocak"
+  february: "Şubat"
+  march: "Mart"
+  april: "Nisan"
+  may: "Mayıs"
+  june: "Haziran"
+  july: "Temmuz"
+  august: "Ağustos"
+  september: "Eylül"
+  october: "Ekim"
+  november: "Kasım"
+  december: "Aralık"
+  formats:
+    long: "%d %B %Y"
+
   activerecord:
     attributes:
       admin:
@@ -62,3 +78,4 @@ tr:
             password_confirmation:
               blank: "alanını giriniz!"
               confirmation: "ile şifre alanları eşleşmiyor!"
+

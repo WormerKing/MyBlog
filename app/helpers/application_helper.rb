@@ -15,28 +15,48 @@ module ApplicationHelper
 
   # TODO: redis ile bu sorgu cache üzerinden alınabilir.
   def get_tags
-    type = controller_name if %w[projects articles].include?(controller_name)
-    sql = "select t.title,count(pt.id) [count] from
-    #{type}_tags as pt full join tags as t on t.id = pt.tag_id
-      group by t.title order by count(pt.id) desc"
-
-    result = ActiveRecord::Base.connection.execute(sql)
-    result.to_a
-    # Tag.all
+    if controller.class.name.split('::').first == 'Pages' && %w[projects articles categories
+                                                                tags].include?(controller_name)
+      case controller_name
+      when 'projects'
+        Tag.joins(:projects).group(:title).count
+      when 'articles'
+        Tag.joins(:articles).group(:title).count
+      else
+        projects = Tag.joins(:projects).group(:title).count
+        articles = Tag.joins(:articles).group(:title).count
+        projects.merge(articles) { |_key, new, old| new + old }
+      end.sort_by { |_i, j| j }.reverse.to_h
+    end
   end
 
   def get_categories
-    type = controller_name if %w[projects articles].include?(controller_name)
+    if controller.class.name.split('::').first == 'Pages' && %w[projects articles categories
+                                                                tags].include?(controller_name)
+      case controller_name
+      when 'projects'
+        Category.joins(:projects).group(:name).count
+      when 'articles'
+        Category.joins(:articles).group(:name).count
+      else
+        # Category.left_joins(:articles).left_joins(:projects).group(:name).count
+        projects = Category.joins(:projects).group(:name).count
+        articles = Category.joins(:articles).group(:name).count
+        projects.merge(articles) { |_key, new, old| new + old }
+      end.sort_by { |_i, j| j }.reverse.to_h
+    end
+  end
 
-    # Category.all
-    sql = "select c.name,count(*) [count]
-      from #{type} as p
-      inner join categories as c
-      on p.category_id = c.id
-      group by c.name
-    "
-
-    result = ActiveRecord::Base.connection.execute(sql)
-    result.to_a
+  # Date to localize, humanize
+  def tr_humanize(date)
+    date_arr = date.strftime('%d %B %Y').split
+    date_arr.map! do |el|
+      if I18n.exists?(el.downcase)
+        I18n.translate(el.downcase)
+      else
+        el
+      end
+    end
+    date_arr.join(' ')
   end
 end
