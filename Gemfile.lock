@@ -254,7 +254,6 @@ GEM
       railties (>= 6.0.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
-    unicode_utils (1.4.0)
     validate_url (1.0.15)
       activemodel (>= 3.0.0)
       public_suffix
@@ -299,7 +298,6 @@ DEPENDENCIES
   telephone_number (~> 1.4, >= 1.4.21)
   turbo-rails
   tzinfo-data
-  unicode_utils (~> 1.4)
   validate_url (~> 1.0, >= 1.0.15)
   web-console
 

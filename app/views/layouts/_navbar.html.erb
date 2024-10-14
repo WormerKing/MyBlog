@@ -35,8 +35,8 @@
 </nav-->
 <nav class="navbar navbar-expand-lg fixed-top bg-info-subtle">
 	  <div class="container py-1">
-	  	<% if ["articles","projects","categories","tags"].include?(controller_name)%>
-        <button id="sidebarToggle" class="btn btn-outline-primary me-5">
+      <% if ["articles","projects","categories","tags"].include?(controller_name)%> 
+        <button id="sidebarToggle" class="btn btn-outline-primary me-5" data-action="click->pages-sidebar#toggleSidebar">
           <span class="navbar-toggler-icon">
         </button>
 	  	<%end%>
@@ -57,8 +57,4 @@
 			</div>
 	  </div>
 </nav>
-<!--div class="container-fluid bg-warning my-4">
-	<div class="row mt-5">
-		<div class="col-12"></div>
-	</div>
-</div-->
+

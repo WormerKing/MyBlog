@@ -15,10 +15,10 @@
               </div>
 						</div>
 						<div class="row pt-3 mx-3">
-              <div class="col-sm-12 py-2 input-group">
-                <%= form.password_field("password",id:"password",class:"form-control fs-4 #{flash[:password_error] ? 'is-invalid' : ''}",placeholder:"Şifre",required:"") %>
+              <div class="col-sm-12 py-2 input-group" data-controller="login">
+                <%= form.password_field("password","data-login-target" => "password",id:"password",class:"form-control fs-4 #{flash[:password_error] ? 'is-invalid' : ''}",placeholder:"Şifre",required:"") %>
                 <div class="input-group-text">
-                  <input class="form-check-input mt-0" id="checkbox" type="checkbox" value="Şifreyi göster" aria-label="Checkbox for following text input">
+                  <input data-action="click->login#togglePasswordType" data-login-target="checkbox" class="form-check-input mt-0" id="checkbox" type="checkbox" value="Şifreyi göster" aria-label="Checkbox for following text input">
                 </div>
 
                 <%= print_session_error_messages(flash[:password_error]) if flash[:password_error]%>
@@ -36,16 +36,3 @@
 		</div>
 	</div>
 </div>
-<%#TODO buradaki javascript kodu stimulus ile yazılacak%>
-<script>
-  var password = document.getElementById("password");
-  var checkbox = document.getElementById("checkbox");
-
-  checkbox.addEventListener("click",() => {
-    if (checkbox.checked) {
-      password.type = "text";
-    } else {
-      password.type = "password";
-    }
-  });
-</script>

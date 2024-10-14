@@ -24,14 +24,14 @@
 							</div>
 						</div>
 						<div class="row pt-3 mx-3">
-							<div class="col-sm-6">
+							<div class="col-sm-6 my-3">
 								<div class="form-floating">
   									<%= form.telephone_field(:telephone_number,class:"form-control",id:"floatingTextarea",required:"")%>
   									<%= form.label :telephone_number,for: "floatingTextarea"%>
   									<%= print_error_messages(@communication,:telephone_number)%>
 								</div>
               </div>
-              <div class="col-sm-6">
+              <div class="col-sm-6 my-3">
 								<div class="form-floating">
   									<%= form.url_field(:instagram,class:"form-control",id:"floatingInstagram",required:"")%>
   									<%= form.label :instagram,for: "floatingInstagram"%>

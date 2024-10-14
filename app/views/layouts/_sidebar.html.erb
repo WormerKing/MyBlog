@@ -1,5 +1,5 @@
 <%= stylesheet_link_tag "_sidebar", "data-turbo-track": "reload" %>
-<div class="sidebar text-center mt-5 pt-5" id="sidebar">
+<div class="sidebar text-center mt-5 pt-5 active" id="sidebar" data-pages-sidebar-target="sidebar">
     <h3 class="p-3">Categories</h3>
     <div class="categories">
         <ul class="list-group">
@@ -31,12 +31,6 @@
     </div> 
 </div>
 
-<script>
-    var toggleButton = document.getElementById('sidebarToggle');
-    var sidebar = document.getElementById('sidebar');
-
-    toggleButton.addEventListener('click', () => {
-        sidebar.classList.toggle('active');
-    });
-    <%#TODO bu kısmı stimulus ile tekrar yaz%>
-</script>
+<% content_for :body_attr do %>
+    data-controller="pages-sidebar"
+<% end %>
