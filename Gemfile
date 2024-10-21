@@ -26,8 +26,6 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 
-gem 'redis'
-
 # Validate telephone number
 gem 'telephone_number', '~> 1.4', '>= 1.4.21'
 
@@ -44,7 +42,7 @@ gem 'bootstrap-icons-helper'
 # gem "redis", ">= 4.0.1"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
-# gem "kredis"
+gem 'kredis', '~> 1.7'
 
 # validate urls
 gem 'validate_url', '~> 1.0', '>= 1.0.15'

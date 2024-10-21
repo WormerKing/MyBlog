@@ -9,7 +9,10 @@ module Pages
     private
 
     def select_tag
-      @tag = Tag.find_by(title: decode_url(params[:id]))
+      @tag = Tag.find_by_title(decode_url(params[:id]))
+      return if @tag
+
+      redirect_to(pages_articles_path)
     end
   end
 end

@@ -23,19 +23,19 @@
 					<div class="col-sm-5 py-3 <%= "offset-sm-2" if project.last == p %>">
 						<div class="row">
 							<div class="col-lg-6 order-last order-lg-first text-sm-center text-lg-start">
-								<h4 class="py-1"><%= link_to(p.title,pages_project_path(string_to_url(p.title)),class:"text-decoration-none text-info")%>
+                <h4 class="py-1"><%= link_to(p["title"],pages_project_path(string_to_url(p["title"])),class:"text-decoration-none text-info")%>
 								</h4>
 								
 								<p class="text-break">
-									<%= p.header%>
+									<%= p["header"]%>
 								</p>
 								
 								<ul class="list-inline">
-									<% p.tags.each do |tag|%>
-										<li class="list-inline-item rounded-pill fs-12 bg-dark p-2 m-1"><%= link_to(tag.title,pages_tag_path(string_to_url(tag.title)),class:"text-decoration-none text-white")%></li>
+									<% p["tags"].each do |tag|%>
+										<li class="list-inline-item rounded-pill fs-12 bg-dark p-2 m-1"><%= link_to(tag["title"],pages_tag_path(string_to_url(tag["title"])),class:"text-decoration-none text-white")%></li>
 									<%end%>
 								</ul>
-                <%= link_to(pages_project_path(string_to_url(p.title)),class:"btn btn-primary rounded rounded-pill mt-3 text-center") do %>
+                <%= link_to(pages_project_path(string_to_url(p["title"])),class:"btn btn-primary rounded rounded-pill mt-3 text-center") do %>
                   Proje Bilgileri
                   <%= bootstrap_icon "arrow-right",width:22,height: 22,color:"white",class:"text-center ms-3"%>
                 <% end %>
@@ -62,16 +62,16 @@
 				<% article.each do |a| %>
 					<div class="col-sm-5 my-5 border-bottom text-center text-md-start border-dark <%= 'offset-sm-2' if article.last == a%>">
 						<h3>
-							<%= link_to(a.title,pages_article_path(string_to_url(a.title)),class:" article-title-hover")%>
+							<%= link_to(a["title"],pages_article_path(string_to_url(a["title"])),class:" article-title-hover")%>
 						</h3>
-						<p class="pt-3 text-break"><%= a.header%></p>
-						<strong class="text-start">Kategori : 
-							<%= link_to(a.category.name,pages_category_path(string_to_url(a.category.name)),class:"text-decoration-none")%>
+						<p class="pt-3 text-break"><%= a["header"]%></p>
+            <strong class="text-start">Kategori :
+              <%= link_to(a["category"]["name"],pages_category_path(string_to_url(a["category"]["name"])),class:"text-decoration-none")%>
 						</strong>
 						<ul class="list-inline pt-3">
-							<% a.tags.each do |tag|%>
+							<% a["tags"].each do |tag|%>
 								<li class="list-inline-item text-light rounded-pill border border-dark p-2 fs-12 bg-secondary m-1">
-									<%= link_to(tag.title,pages_tag_path(string_to_url(tag.title)),class:"text-decoration-none text-white")%>
+									<%= link_to(tag["title"],pages_tag_path(string_to_url(tag["title"])),class:"text-decoration-none text-white")%>
 								</li>
 							<% end %>
 						</ul>

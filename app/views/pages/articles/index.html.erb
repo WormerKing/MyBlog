@@ -2,7 +2,7 @@
 <div class="container-lg mt-5 pt-5">
     <h1>Kullanıcı Yazıları</h1>
     <p>Burada oluşturduğum yazılarım bulunmaktadır</p>
-    <p>Toplam yazı sayısı: <strong><%= @articles.count%></strong></p>
+    <p>Toplam yazı sayısı: <strong><%= @articles.length%></strong></p>
     <% @articles.each do |article|%>
       <div class="card mb-3">
         <div class="card-body">

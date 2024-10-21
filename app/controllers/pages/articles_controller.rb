@@ -8,8 +8,6 @@ module Pages
 
     def show
       IncrementService.add_count(@article)
-      @string = decode_url(params[:id])
-      puts @string
     end
 
     private

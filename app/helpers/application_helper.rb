@@ -7,26 +7,25 @@ module ApplicationHelper
 
   def string_to_url(str)
     str.downcase.gsub(' ', '+')
+  rescue NoMethodError
+    str
   end
 
   def print_session_error_messages(message)
     "<div class=\"invalid-feedback fs-5 text-center\">#{message}</div>".html_safe
   end
 
-  # TODO: redis ile bu sorgu cache üzerinden alınabilir.
   def get_tags
     if controller.class.name.split('::').first == 'Pages' && %w[projects articles categories
                                                                 tags].include?(controller_name)
       case controller_name
       when 'projects'
-        Tag.joins(:projects).group(:title).count
+        KredisService.get_tags_list('projects')
       when 'articles'
-        Tag.joins(:articles).group(:title).count
+        KredisService.get_tags_list('articles')
       else
-        projects = Tag.joins(:projects).group(:title).count
-        articles = Tag.joins(:articles).group(:title).count
-        projects.merge(articles) { |_key, new, old| new + old }
-      end.sort_by { |_i, j| j }.reverse.to_h
+        KredisService.get_tags_list
+      end
     end
   end
 
@@ -35,15 +34,12 @@ module ApplicationHelper
                                                                 tags].include?(controller_name)
       case controller_name
       when 'projects'
-        Category.joins(:projects).group(:name).count
+        KredisService.get_categories_list('projects')
       when 'articles'
-        Category.joins(:articles).group(:name).count
+        KredisService.get_categories_list('articles')
       else
-        # Category.left_joins(:articles).left_joins(:projects).group(:name).count
-        projects = Category.joins(:projects).group(:name).count
-        articles = Category.joins(:articles).group(:name).count
-        projects.merge(articles) { |_key, new, old| new + old }
-      end.sort_by { |_i, j| j }.reverse.to_h
+        KredisService.get_categories_list
+      end
     end
   end
 

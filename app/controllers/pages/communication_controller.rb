@@ -1,7 +1,7 @@
 module Pages
   class CommunicationController < ApplicationController
     def index
-      @communication = Communication.first
+      @communication = KredisService.get_communication
     end
   end
 end

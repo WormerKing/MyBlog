@@ -1,8 +1,7 @@
 class MainController < ApplicationController
   def index
-    @aboutme = Aboutme.first
-    @projects = Project.order(created_at: :desc).limit(4).includes(:tags, :category).in_groups_of(2)
-    @articles = Article.order(created_at: :desc).limit(4).includes(:tags, :category).in_groups_of(2)
+    @aboutme = KredisService.get_aboutme
+    @projects = KredisService.get_top_projects
+    @articles = KredisService.get_top_articles
   end
 end
-

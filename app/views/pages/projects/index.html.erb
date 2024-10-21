@@ -2,7 +2,7 @@
 <div class="container-lg mt-5 pt-5">
     <h1>Kullanıcı Projeleri</h1>
     <p>Burada oluşturduğum projelerim listelenmektedir</p>
-    <p>Toplam proje sayısı: <strong><%= @projects.count%></strong></p>
+    <p>Toplam proje sayısı: <strong><%= @projects.length%></strong></p>
     <% @projects.each do |project|%>
       <div class="card mb-3">
         <div class="card-body">

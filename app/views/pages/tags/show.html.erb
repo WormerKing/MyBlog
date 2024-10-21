@@ -2,9 +2,9 @@
 <div class="container-lg mt-5 pt-5 text-capitalize">
     <h1><%= @tag.title%> <span class="text-lowercase">etiketine ait içerikler</span></h1>
     <p><%= @tag.title%> kategorisinde bulunan projeler ve yazılar burada listelenmektedir.</p>
-    <p>Toplam proje sayısı: <strong><%= @tag.projects.count%></strong></p>
-    <p>Toplam yazı sayısı: <strong><%= @tag.articles.count%></strong></p>
-    <% if @tag.projects.count != 0%>
+    <p>Toplam proje sayısı: <strong><%= @tag.projects.length%></strong></p>
+    <p>Toplam yazı sayısı: <strong><%= @tag.articles.length%></strong></p>
+    <% if @tag.projects.length != 0%>
       <h2 class="text-capitalize text-center"><%= @tag.title%> Projeleri</h2>
     <% end %>
     <% @tag.projects.each do |project|%>
@@ -22,7 +22,7 @@
         </div>
       </div>
     <%end%>
-    <% if @tag.articles.count != 0%>
+    <% if @tag.articles.length != 0%>
       <h2 class="text-capitalize text-center text-danger"><%= @tag.title%> yazıları</h2>
     <% end %>
     <% @tag.articles.each do |article|%>
