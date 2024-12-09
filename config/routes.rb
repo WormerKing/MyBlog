@@ -16,8 +16,12 @@ Rails.application.routes.draw do
     get '/', to: 'panel#index', as: :panel
     resource :aboutme, except: %i[new create destroy], path: 'hakkimda', controller: 'aboutme'
     resource :communication, except: %i[new create destroy], path: 'iletisim', controller: 'communication'
-    resources :projects, path: 'projelerim', controller: 'projects'
-    resources :articles, path: 'yazilarim', controller: 'articles'
+    resources :projects, path: 'projelerim', controller: 'projects' do
+      post :upload_image, on: :collection
+    end
+    resources :articles, path: 'yazilarim', controller: 'articles' do
+      post :upload_image, on: :collection
+    end
     resources :tags, path: 'etiketler', controller: 'tags'
     resources :categories, path: 'kategoriler', controller: 'categories'
     resources :admins, path: 'yoneticiler', controller: 'admins'

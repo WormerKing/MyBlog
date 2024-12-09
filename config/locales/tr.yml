@@ -27,6 +27,7 @@
 #       "yes": yup
 #       enabled: "ON"
 tr:
+  content: "içerik"
   username: "Kullanıcı Adı"
   firstname: "İsim"
   lastname: "Soyisim"
@@ -39,6 +40,7 @@ tr:
   telephone_number: "Telefon Numarası"
   email: "E-posta"
   github: "Github"
+  url: "Link"
 
   # Ay ayarları
   january: "Ocak"
@@ -78,4 +80,3 @@ tr:
             password_confirmation:
               blank: "alanını giriniz!"
               confirmation: "ile şifre alanları eşleşmiyor!"
-

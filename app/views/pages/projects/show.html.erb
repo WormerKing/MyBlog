@@ -1,24 +1,25 @@
-<%= render "layouts/sidebar"%>
+<%= render "shared/sidebar" %>
 <div class="container-lg p-5 mt-5" style="padding-left:2rem;">
   <div class="row text-wrap">
     <h2 class="text-center fw-bold fs-1 text-capitalize">
-      <%= @project.title%>
+      <%= @project.title %>
     </h2>
   </div>
   <div class="row text-wrap">
     <div class="col-sm-12 d-flex justify-content-between align-items-center">
       <div class="d-flex">
-        <h3 class="my-1">Kategori: </h3>
+        <h3 class="my-1">Kategori:
+        </h3>
         <%= link_to(
           @project.category.name,
           pages_category_path(string_to_url(@project.category.name)),
-          class: "btn btn-primary fs-5 text-center text-capitalize"
-        )%>
+          class: "btn btn-primary fs-5 text-center text-capitalize",
+        ) %>
       </div>
       <p class="fs-5">
-        Başlama tarihi: 
+        Başlama tarihi:
         <span class="text-danger">
-          <%= tr_humanize(@project.start_date)%>
+          <%= tr_humanize(@project.start_date) %>
         </span>
       </p>
     </div>
@@ -26,43 +27,62 @@
   <div class="row text-wrap py-2">
     <div class="col-sm-12 d-flex justify-content-between align-items-center">
       <div class="d-flex">
-        <h3>Etiketler: </h3>
-        <% @project.tags.each do |tag|%>
+        <h3>Etiketler:
+        </h3>
+        <% @project.tags.each do |tag| %>
           <%= link_to(
             tag.title,
             pages_tag_path(string_to_url(tag.title)),
-            class: "btn btn-danger text-capitalize mx-1 text-wrap fs-6"
-          )%>
+            class: "btn btn-danger text-capitalize mx-1 text-wrap fs-6",
+          ) %>
         <% end %>
       </div>
       <p class="fs-5">
         Bitiş tarihi:
         <span class="text-warning">
-          <%= tr_humanize(@project.end_date)%>
+          <%= tr_humanize(@project.end_date) %>
         </span>
       </p>
     </div>
   </div>
   <div class="row text-wrap py-2">
-    <p><%= @project.view_count%> görüntülenme</p>
+    <p><%= @project.view_count %>
+      görüntülenme</p>
   </div>
   <div class="row text-wrap py-2">
     <div class="col-sm-12">
       <%= link_to(@project.url,class:"btn btn-primary") do %>
-        Proje adresi <%= bootstrap_icon "arrow-right", width: 25, height: 25, fill: "white" %> 
+        Proje adresi
+        <%= bootstrap_icon "arrow-right", width: 25, height: 25, fill: "white" %>
       <% end %>
     </div>
   </div>
   <hr>
   <div class="row pt-5 py-3 text-wrap">
     <p class="fw-bold fs-4">
-      <%= @project.header%>
+      <%= @project.header %>
     </p>
   </div>
 
   <div class="row text-wrap">
     <p class="fs-5 fw-medium">
-      <%= @project.body%>
+      <%# image_tag @project.gallery %>
+      <%= if @project.image.persisted?
+        image_tag(@project.image, class: "img-fluid img-thumbnail")
+      end %>
     </p>
   </div>
+  <hr class="border border-2 border-primary rounded">
+  <div class="row text-break">
+    <%= display_content @project.content %>
+  </div>
 </div>
+<script>
+  async function wormer() {
+    var data = await fetch("http://localhost:3000/projelerim/aaaaaaaaaaaaaaaaaa")
+    var json_data =  await data.json()
+    console.log(await json_data.image)
+  }
+
+  wormer();
+</script>

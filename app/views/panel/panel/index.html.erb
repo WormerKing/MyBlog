@@ -8,7 +8,6 @@
             <div class="sidebar-logo text-center py-3">
               <%= link_to("Admin panel",panel_path)%>
             </div>
-            
             <!-- Sidebar Navigation -->
             <ul class="sidebar-nav pt-2">
                 <li class="sidebar-header">
@@ -103,13 +102,14 @@
     </aside>
     <!-- Main Component -->
     <div class="main">
-        <nav class="navbar navbar-expand px-3 py-3 border-bottom position-fixed w-100 bg-success">
+      <nav class="navbar navbar-expand px-3 py-3 border-bottom sticky-top w-100 bg-success position-fixed">
             <!-- Button for sidebar toggle -->
             <button class="btn bg-light-subtle" type="button" data-bs-theme="dark" data-action="click->panel#changeVisibility">
                 <span class="navbar-toggler-icon"></span>
             </button>
         </nav>
-        <main class="content px-3 py-5 mt-5 border-top border-primary">
+        <main class="content px-3 py-4 mt-5 border-top border-primary">
+            <%= @flash%>
             <% unless flash.empty?%>
                 <% type = case flash.first.first
                 when "notice" then "success"
@@ -118,7 +118,7 @@
                 when "warning" then "warning"
                 end
                 %>
-                <div class="alert alert-<%= type%> text-center"><%= flash.first.last.capitalize%></div>
+                <div class="alert mt-3 alert-<%= type%> text-center"><%= flash.first.last.capitalize%></div>
             <%end%>
             <%= yield %>
         </main>

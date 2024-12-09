@@ -6,9 +6,13 @@
 				<p class="fs-5 pt-4"><%= @aboutme.body[0..90]%>...</p>
 				<%= link_to("Devamını oku",pages_aboutme_path,class:"link fs-5 rounded rounded-pill btn btn-success text-white my-4")%>
 			</div>
-			<div class="col-sm-5 offset-sm-1">
-				<img src="https://picsum.photos/id/13/1920/1080" alt="" class="w-100 rounded">
-			</div>
+      <div class="col-sm-5 offset-sm-1">
+        <% if @aboutme.profile_photo.persisted? %>
+          <%= image_tag(@aboutme.profile_photo,class:"w-100 rounded")%>
+        <% else %>
+          <img src="https://picsum.photos/id/13/1920/1080" alt="" class="w-100 rounded">
+        <% end %>
+      </div>
 		</div>
 	</div>
 </div>
@@ -41,8 +45,12 @@
                 <% end %>
 							</div>
 							<div class="col-lg-5 offset-md-1 order-first order-lg-second f-flex justify-content-center">
-								<img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100 img-thumbnail img-fluid">
-								<%# link_to("Proje Bilgileri",pages_project_path(p.to_url_string),class:" btn btn-primary rounded rounded-pill mt-3 text-center")%>
+								<% if p["obje"].image.persisted?%>
+                  <%= image_tag(p["obje"].image.variant(resize: "2000x2000"),class:"w-100 img-thumbnail img-fluid",alt: "#{p['title']} project image")%>
+                <% else %>
+                  <img src="https://picsum.photos/id/13/120/120?grayscale" alt="" class="w-100 img-thumbnail img-fluid">
+                <% end %>  
+                <%# link_to("Proje Bilgileri",pages_project_path(p.to_url_string),class:" btn btn-primary rounded rounded-pill mt-3 text-center")%>
 							</div>
 						</div>
 					</div>

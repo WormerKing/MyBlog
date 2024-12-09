@@ -1,4 +1,8 @@
 class KredisService
+  def self.clear_datas
+    # Clear all key, val datas
+    Kredis.clear_all
+  end
   def self.get_aboutme
     aboutme = Kredis.json('aboutme', expires_in: 10.minute)
 
@@ -21,7 +25,14 @@ class KredisService
                                          }
                                        })
     end
-    JSON.load(projects.value)
+    JSON.load(projects.value).each do |i|
+      i.each do |j|
+        tags = j['tags']
+        j.delete('tags')
+        j.store('obje', Project.new(j))
+        j.store('tags', tags)
+      end
+    end
   end
 
   def self.get_top_articles

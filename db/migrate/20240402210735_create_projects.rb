@@ -3,7 +3,7 @@ class CreateProjects < ActiveRecord::Migration[7.1]
     create_table :projects do |t|
       t.string :title
       t.string :header
-      t.text :body
+      t.json :content
       t.string :url
       t.integer :view_count, default: 0
       t.date :start_date

@@ -2,7 +2,11 @@
   <div class="card mb-3"> 
     <div class="row g-0">
       <div class="col-md-6">
-        <%= image_tag("https://picsum.photos/id/237/1920/1080",class:"img-fluid rounded-start",alt:"My Profile Photo")%>
+        <% if @aboutme.profile_photo.persisted? %>
+          <%= image_tag(@aboutme.profile_photo,class:"img-fluid rounded-start",alt: "Tuncay Dinler Photo")%>
+        <% else %>
+          <%= image_tag("https://picsum.photos/id/237/1920/1080",class:"img-fluid rounded-start",alt:"My Profile Photo")%>
+        <% end %>
       </div>
       <div class="col-md-6 d-flex align-items-center">
         <div class="card-body h-100">

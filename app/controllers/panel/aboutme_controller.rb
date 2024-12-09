@@ -1,25 +1,27 @@
 module Panel
-	class AboutmeController < ApplicationController
-		before_action :select_aboutme,only: %i[ show edit update ]
-		def show
+  class AboutmeController < ApplicationController
+    before_action :select_aboutme, only: %i[show edit update]
+    # after_action :send_message, only: %i[update]
+    def show; end
 
-		end
-		def edit
+    def edit; end
 
-		end
-		def update
-			@param = params.require(:aboutme).permit(:body)["body"]
-			if @aboutme.update(body:@param)
-				flash[:notice] = "Hakkımda kısmı başarıyla güncellendi."
-				redirect_to(panel_path)
-			else
-				render :edit
-			end
-		end
+    def update
+      if @aboutme.update(get_params)
+        redirect_to(panel_path)
+      else
+        render :edit
+      end
+    end
 
-		private
-		def select_aboutme
-			@aboutme = Aboutme.first
-		end
-	end
+    private
+
+    def select_aboutme
+      @aboutme = Aboutme.first
+    end
+
+    def get_params
+      params.require(:aboutme).permit(:body, :profile_photo)
+    end
+  end
 end

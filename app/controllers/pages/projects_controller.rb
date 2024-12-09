@@ -7,6 +7,10 @@ module Pages
 
     def show
       IncrementService.add_count(@project)
+      respond_to do |format|
+      	format.html
+      	format.json {render json: {image: {encoded: Base64.encode64(@project.image.download),type: @project.image.content_type}}}
+      end
     end
 
     private

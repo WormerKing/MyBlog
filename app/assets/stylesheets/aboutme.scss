@@ -1,10 +1,16 @@
-.tasiyici {
-	width: 700px;
-	height: 600px;
+.text-area {
+  height: 400px;
+  resize: none;
 }
 
-.text-area {
-	height: 400px;
-	max-height: 400px;
-	min-height: 400px;
+@media screen and (min-width: 1200px) {
+  .tasiyici {
+    width: 80%;
+  }
+}
+
+@media screen and (min-width: 922px) {
+  .tasiyici {
+    width: 100%;
+  }
 }

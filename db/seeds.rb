@@ -39,7 +39,7 @@ if %w[development test].include?(Rails.env)
     Project.create(
       title: Faker::Team.unique.name,
       header: Faker::Lorem.words(number: 10).join(' '),
-      body: Faker::Lorem.paragraphs(number: 3).join,
+      # body: Faker::Lorem.paragraphs(number: 3).join,
       url: Faker::Avatar.image,
       start_date: DateTime.now - 365,
       end_date: DateTime.now,
@@ -52,7 +52,7 @@ if %w[development test].include?(Rails.env)
     Article.create(
       title: Faker::Team.unique.name,
       header: Faker::Lorem.words(number: 10).join(' '),
-      body: Faker::Lorem.paragraphs(number: 3).join,
+      # body: Faker::Lorem.paragraphs(number: 3).join,
       category: Category.last,
       tags: Tag.order(created_at: :desc).limit(6)
     )

@@ -1,6 +1,10 @@
 class Project < ApplicationRecord
+  include ProjectImagesHandler
+
   belongs_to :category, validate: true
   has_and_belongs_to_many :tags
+  has_one_attached :image
+  has_many :project_images
 
   validate :control_dates
 
@@ -19,11 +23,7 @@ class Project < ApplicationRecord
               too_long: 'kısmı en fazla %<count>s karakter olabilir!'
             }
 
-  validates :body,
-            length: {
-              minimum: 50,
-              too_short: 'kısmı en az %<count>s karakter olmalıdır!'
-            }
+  # validates :content, presence: {message: "kısmı boş bırakılamaz!"}
 
   validates :url,
             presence: { message: 'kısmı boş bırakılamaz!' },

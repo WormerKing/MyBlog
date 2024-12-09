@@ -1,36 +1,45 @@
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-12">
-			<% unless @tags.empty?%>
-				<div class="d-flex justify-content-center py-3">
-					<%= link_to("Yeni Etiket",new_tag_path,class:"btn btn-warning text-center")%>
-				</div>
-				<table class="table table-bordered table-wrapper">
-					<thead>
-						<tr class="text-center table-success border border-primary">
-							<th scope="col">id</th>
-							<th scope="col">title</th>
-							<td scope="col">Actions</td>
-						</tr>
-					</thead>
-					<tbody>
-						<% @tags.each do |tag|%>
-							<tr class="border table-primary text-center border border-success">
-								<td scope="row"><%= tag.id%></td>
-								<td><%= tag.title%></td>
-								<td>
-									<%= link_to("Düzenle",edit_tag_path(tag),class:"btn btn-warning")%>
-									<%= link_to("Sil",tag,class:"btn btn-danger",data: {"turbo-method" => :delete,"turbo-confirm" => "Bu kayıt silinsin mi"})%>
-								</td>
-							</tr>
-						<% end %>
-					</tbody>
-				</table>
-			<% else %>
-				<div class="d-flex justify-content-center">
-					<%= link_to("Yeni Etiket",new_tag_path,class:"btn btn-warning text-center")%>
-				</div>
-			<% end %>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-sm-12">
+      <% unless @tags.empty? %>
+        <div class="d-flex justify-content-center py-3">
+          <%= link_to("Yeni Etiket", new_tag_path, class: "btn btn-warning text-center") %>
+        </div>
+        <table class="table table-bordered table-wrapper">
+          <thead>
+            <tr class="text-center table-success border border-primary">
+              <th scope="col">id</th>
+              <th scope="col">title</th>
+              <td scope="col">Actions</td>
+            </tr>
+          </thead>
+          <tbody>
+            <% @tags.each do |tag| %>
+              <tr class="border table-primary text-center border border-success">
+                <td scope="row"><%= tag.id %></td>
+                <td><%= tag.title %></td>
+                <td>
+                  <%= link_to("Düzenle", edit_tag_path(tag), class: "btn btn-warning") %>
+                  <%= link_to(
+                    "Sil",
+                    tag,
+                    class: "btn btn-danger",
+                    data: {
+                      "turbo-method" => :delete,
+                      "turbo-confirm" => "Bu kayıt silinsin mi",
+                    },
+                  ) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="d-flex justify-content-center">
+          <%= link_to("Yeni Etiket", new_tag_path, class: "btn btn-warning text-center") %>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
+
