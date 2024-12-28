@@ -19,6 +19,6 @@ class Article < ApplicationRecord
               too_long: 'kısmı en fazla %<count>s karakter uzunluğunda olabilir!'
             }
 
-  # validates :content, presence: { message: 'kısmı boş bırakılamaz!' }
+  validates :content, presence: { message: 'kısmı boş bırakılamaz!' }
   before_save :reorganize_title
 end

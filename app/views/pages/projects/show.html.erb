@@ -74,15 +74,17 @@
   </div>
   <hr class="border border-2 border-primary rounded">
   <div class="row text-break">
-    <%= display_content @project.content %>
+    <div
+      data-controller="editor"
+      data-editor-editor-data-value="<%= @project.content%>"
+      data-editor-readonly-value="true"
+    >
+      <div data-editor-target="hidden_input">
+
+      </div>
+      <div data-editor-target="area">
+
+      </div>
+    </div>
   </div>
 </div>
-<script>
-  async function wormer() {
-    var data = await fetch("http://localhost:3000/projelerim/aaaaaaaaaaaaaaaaaa")
-    var json_data =  await data.json()
-    console.log(await json_data.image)
-  }
-
-  wormer();
-</script>

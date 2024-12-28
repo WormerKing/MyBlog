@@ -27,6 +27,9 @@
 #       "yes": yup
 #       enabled: "ON"
 tr:
+  id: "İd"
+  actions: "Aktiviteler"
+  tags: "Etiketler"
   content: "içerik"
   username: "Kullanıcı Adı"
   firstname: "İsim"
@@ -41,6 +44,7 @@ tr:
   email: "E-posta"
   github: "Github"
   url: "Link"
+  category: "Kategori"
 
   # Ay ayarları
   january: "Ocak"

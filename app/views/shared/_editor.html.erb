@@ -1,0 +1,9 @@
+<%# form: form %>
+<%= form.hidden_field :content, data: { editor_target: "hidden_input" },required: true%>
+
+<div
+  id="editor_content"
+  class="border border-2 rounded border-dark bg-white"
+  data-editor-target="area"
+>
+</div>

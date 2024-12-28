@@ -1,71 +1,104 @@
 <%= stylesheet_link_tag "slimselect", "data-turbo-track": "reload" %>
 <%= stylesheet_link_tag "new_project", "data-turbo-track": "reload" %>
 <div class="pt-5 area vh-75">
-	<div class="container">
-		<div class="row">
-			<div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
-				<div class="border border-success rounded-2 bg-primary-subtle tasiyici">
-					<%= form_for(@admin,method: "post",class:"form-floating") do |form|%>
-						<div class="row">
-							<h4 class="pt-4 ps-5 text-dark">Yönetici Ekle</h4>
-						</div>
-						<div class="row mx-3">
-							<div class="col-sm-6 py-2 text-start">
-								<div class="form-floating">
-									<%= form.text_field(:firstname,class:"form-control form-control-lg",id:"floatingFirstName",required:"")%>
-								  	<%= form.label "İsim",for: "floatingFirstName"%>
-								  	<%= print_error_messages(@admin,:firstname)%>
-								</div>
-							</div>
-							<div class="col-sm-6 py-2 text-start">
-								<div class="form-floating">
-									<%= form.text_field(:lastname,class:"form-control form-control-lg",id:"floatingLastname",required:"")%>
-								  	<%= form.label "Soyad",for: "floatingLastname"%>
-								  	<%= print_error_messages(@admin,:lastname)%>
-								</div>
-							</div>
-						</div>
-						<div class="row mx-3">
-							<div class="col-sm-6 py-2 text-start">
-								<div class="form-floating">
-									<%= form.text_field(:username,class:"form-control form-control-lg",id:"floatingUsername",required:"")%>
-								  	<%= form.label "Kullanıcı adı",for: "floatingUsername"%>
-								  	<%= print_error_messages(@admin,:username)%>
-								</div>
-							</div>
-							<div class="col-sm-6 py-2 text-start">
-								<div class="form-floating">
-									<%= form.email_field(:email,class:"form-control form-control-lg",id:"floatingEmail",required:"")%>
-								  	<%= form.label "Eposta",for: "floatingEmail"%>
-								  	<%= print_error_messages(@admin,:email)%>
-								</div>
-							</div>
-						</div>
-						<div class="row mx-3">
-							<div class="col-sm-6 py-2 text-start">
-								<div class="form-floating">
-									<%= form.password_field(:password,value:@admin.password,class:"form-control form-control-lg",id:"floatingPassword",required:"")%>
-								  	<%= form.label "Şifre",for: "floatingPassword"%>
-								  	<%= print_error_messages(@admin,:password)%>
-								</div>
-							</div>
-							<div class="col-sm-6 py-2 text-start">
-								<div class="form-floating">
-									<%= form.password_field(:password_confirmation,value:(@admin.password_confirmation if @admin.password_confirmation),class:"form-control form-control-lg",id:"floatingRePassword",required:"")%>
-								  	<%= form.label "Şifre tekrarı",for: "floatingRePassword"%>
-								  	<%= print_error_messages(@admin,:password_confirmation)%>
-								</div>
-							</div>
-						</div>
-						<hr class="border border-secondary">
-						<div class="row">
-							<div class="col-sm-12 d-flex justify-content-center mb-5">
-								<input type="submit" value="Gönder" class="btn btn-primary mt-4">
-							</div>
-						</div>
-					<% end %>
-				</div>
-			</div>
-		</div>
-	</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
+        <div class="border border-success rounded-2 bg-primary-subtle tasiyici">
+          <%= form_for(@admin,method: "post",class:"form-floating") do |form| %>
+            <div class="row">
+              <h4 class="pt-4 ps-5 text-dark">Yönetici Ekle</h4>
+            </div>
+            <div class="row mx-3">
+              <div class="col-sm-6 py-2 text-start">
+                <div class="form-floating">
+                  <%= form.text_field(
+                    :firstname,
+                    class: "form-control form-control-lg",
+                    id: "floatingFirstName",
+                    required: "",
+                  ) %>
+                  <%= form.label I18n.translate(:firstname), for: "floatingFirstName" %>
+                  <%= print_error_messages(@admin, :firstname) %>
+                </div>
+              </div>
+              <div class="col-sm-6 py-2 text-start">
+                <div class="form-floating">
+                  <%= form.text_field(
+                    :lastname,
+                    class: "form-control form-control-lg",
+                    id: "floatingLastname",
+                    required: "",
+                  ) %>
+                  <%= form.label I18n.translate("lastname"), for: "floatingLastname" %>
+                  <%= print_error_messages(@admin, :lastname) %>
+                </div>
+              </div>
+            </div>
+            <div class="row mx-3">
+              <div class="col-sm-6 py-2 text-start">
+                <div class="form-floating">
+                  <%= form.text_field(
+                    :username,
+                    class: "form-control form-control-lg",
+                    id: "floatingUsername",
+                    required: "",
+                  ) %>
+                  <%= form.label I18n.translate("username"), for: "floatingUsername" %>
+                  <%= print_error_messages(@admin, :username) %>
+                </div>
+              </div>
+              <div class="col-sm-6 py-2 text-start">
+                <div class="form-floating">
+                  <%= form.email_field(
+                    :email,
+                    class: "form-control form-control-lg",
+                    id: "floatingEmail",
+                    required: "",
+                  ) %>
+                  <%= form.label I18n.translate("email"), for: "floatingEmail" %>
+                  <%= print_error_messages(@admin, :email) %>
+                </div>
+              </div>
+            </div>
+            <div class="row mx-3">
+              <div class="col-sm-6 py-2 text-start">
+                <div class="form-floating">
+                  <%= form.password_field(
+                    :password,
+                    value: @admin.password,
+                    class: "form-control form-control-lg",
+                    id: "floatingPassword",
+                    required: "",
+                  ) %>
+                  <%= form.label I18n.translate("password"), for: "floatingPassword" %>
+                  <%= print_error_messages(@admin, :password) %>
+                </div>
+              </div>
+              <div class="col-sm-6 py-2 text-start">
+                <div class="form-floating">
+                  <%= form.password_field(
+                    :password_confirmation,
+                    value: (@admin.password_confirmation if @admin.password_confirmation),
+                    class: "form-control form-control-lg",
+                    id: "floatingRePassword",
+                    required: "",
+                  ) %>
+                  <%= form.label I18n.translate("password_confirmation"), for: "floatingRePassword" %>
+                  <%= print_error_messages(@admin, :password_confirmation) %>
+                </div>
+              </div>
+            </div>
+            <hr class="border border-secondary">
+            <div class="row">
+              <div class="col-sm-12 d-flex justify-content-center mb-5">
+                <input type="submit" value="Gönder" class="btn btn-primary mt-4">
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+

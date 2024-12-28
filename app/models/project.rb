@@ -23,7 +23,8 @@ class Project < ApplicationRecord
               too_long: 'kısmı en fazla %<count>s karakter olabilir!'
             }
 
-  # validates :content, presence: {message: "kısmı boş bırakılamaz!"}
+  # TODO: content kısmını activerecord_json_validator ile validate et
+  # validates :content, presence: { message: 'kısmı boş bırakılamaz!' }
 
   validates :url,
             presence: { message: 'kısmı boş bırakılamaz!' },
@@ -33,6 +34,12 @@ class Project < ApplicationRecord
   validates :start_date, :end_date, presence: { message: 'kısmı boş olamaz!' }
 
   before_save :reorganize_title
+
+  def get_image_url
+    return nil if image.blank? || !image.attached?
+
+    Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true) if image.attached?
+  end
 
   private
 

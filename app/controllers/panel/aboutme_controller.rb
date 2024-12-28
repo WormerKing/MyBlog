@@ -4,7 +4,13 @@ module Panel
     # after_action :send_message, only: %i[update]
     def show; end
 
-    def edit; end
+    def edit
+        if @aboutme.profile_photo.persisted?
+            @filename = @aboutme.profile_photo.filename.to_s
+            @file_size = @aboutme.profile_photo.byte_size
+            @image_url = rails_blob_url(@aboutme.profile_photo)
+        end
+    end
 
     def update
       if @aboutme.update(get_params)

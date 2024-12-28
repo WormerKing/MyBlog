@@ -1,25 +1,28 @@
 <div class="text-white pt-5 vh-100">
-	<div class="container pt-5">
-		<div class="row py-5">
-			<div class="col-lg-6">
-        <% if @aboutme.profile_photo.persisted? %>
-          <%= image_tag(@aboutme.profile_photo,class:"w-100 rounded")%>
-        <% else%>
+  <div class="container pt-5">
+    <div class="row py-5">
+      <div class="col-lg-6">
+        <% if @aboutme["image_url"] %>
+          <%= image_tag(request.base_url + @aboutme["image_url"], class: "w-100 rounded") %>
+        <% else %>
           <img src="https://picsum.photos/id/63/1920/1080" alt="" class="w-100 rounded">
-        <% end%>
+        <% end %>
       </div>
-			<div class="col-lg-5 offset-lg-1 text-start pt-5 pt-lg-0">
-				<h1>Ben kimim ?</h1>
-				<p class="fs-5">
-					<%= @aboutme.body%>
-				</p>
-				<%= link_to("Bana mail gönderin","mailto:#{@email}",class:"btn btn-danger rounded rounded-pill px-4 py-2 mt-5")%>
-			</div>
-		</div>
-	</div>
+      <div class="col-lg-5 offset-lg-1 text-start pt-5 pt-lg-0">
+        <h1>Ben kimim ?</h1>
+        <p class="fs-5">
+          <%= @aboutme["body"] %>
+        </p>
+        <%= link_to(
+          "Bana mail gönderin",
+          "mailto:#{@email}",
+          class: "btn btn-danger rounded rounded-pill px-4 py-2 mt-5",
+        ) %>
+      </div>
+    </div>
+  </div>
 </div>
-
 <!-- add body class with content -->
 <% content_for :body_class do %>
-	bg-dark
-<%end%>
+  bg-dark
+<% end %>

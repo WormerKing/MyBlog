@@ -1,43 +1,51 @@
 <div class="container-fluid">
-	<div class="row">
-		<div class="col-sm-12 pt-4">
-			<% if @projects.empty?%>
-				<h1 class="text-center pt-3">Yeni bir proje oluşturun</h1>
-				<div class="d-flex justify-content-center pt-4">
-					<%= link_to("Yeni proje",new_project_path,class:"btn btn-warning")%>
-				</div>
-	    	<% else %>
-	    		<div class="d-flex justify-content-center pb-4">
-					<%= link_to("Yeni proje",new_project_path,class:"btn btn-warning")%>
-				</div>
-				<table class="table table-bordered border-primary text-center">
-				 	<thead class="table-info">
-				    	<tr>
-				      		<th scope="col">id</th>
-				      		<th scope="col">Title</th>
-				      		<th scope="col">Category</th>
-				      		<th scope="col">Url</th>
-				      		<th class="col">Actions</th>
-				    	</tr>
-				  	</thead>
-				  	<tbody class="table-success">
-				    	<% @projects.each do |project|%>
-					    	<tr>
-					    		<th scope="row"><%= project.id%></th>
-					    		<td><%= project.title%></td>
-					    		<td><%= project.category.name%></td>
-					    		<td>
-									<%= link_to("Github",project.url,class:"btn btn-warning")%>	
-					    		</td>
-					    		<td>
-					    			<%= link_to("Düzenle",edit_project_path(project),class:"btn btn-warning")%>
-					    			<%= link_to("Sil",project,class:"btn btn-danger",data: {"turbo-method" => :delete})%>
-					    		</td>
-					    	</tr>
-				    	<% end %>
-				  	</tbody>
-				</table>
-			<% end %>
-		</div>
-	</div>
+  <div class="row">
+    <div class="col-sm-12 pt-4">
+      <% if @projects.empty? %>
+        <h1 class="text-center pt-3">Yeni bir proje oluşturun</h1>
+        <div class="d-flex justify-content-center pt-4">
+          <%= link_to("Yeni proje", new_project_path, class: "btn btn-warning") %>
+        </div>
+      <% else %>
+        <div class="d-flex justify-content-center pb-4">
+          <%= link_to("Yeni proje", new_project_path, class: "btn btn-warning") %>
+        </div>
+        <table class="table table-bordered border-primary text-center">
+          <thead class="table-info">
+            <tr>
+              <th scope="col">id</th>
+              <th scope="col"><%= I18n.translate("title") %></th>
+              <th scope="col"><%= I18n.translate("category") %></th>
+              <th scope="col"><%= I18n.translate("url") %></th>
+              <th class="col"><%= I18n.translate("actions") %></th>
+            </tr>
+          </thead>
+          <tbody class="table-success">
+            <% @projects.each do |project| %>
+              <tr>
+                <th scope="row"><%= project.id %></th>
+                <td><%= project.title %></td>
+                <td><%= project.category.name %></td>
+                <td>
+                  <%= link_to("Github", project.url, class: "btn btn-warning") %>
+                </td>
+                <td>
+                  <%= link_to("Düzenle", edit_project_path(project), class: "btn btn-warning") %>
+                  <%= link_to(
+                    "Sil",
+                    project,
+                    class: "btn btn-danger",
+                    data: {
+                      "turbo-method" => :delete,
+                    },
+                  ) %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
 </div>
+

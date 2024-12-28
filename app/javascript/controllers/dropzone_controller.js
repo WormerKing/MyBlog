@@ -8,13 +8,17 @@ import {
   insertAfter,
 } from "../helpers/dropzone";
 
-// Dropzone.autoDiscover = false;
+Dropzone.autoDiscover = false;
 
 export default class extends Controller {
+  static values = {
+    imageurl: String,
+    filename: String,
+    filesize: Number,
+  };
   static targets = ["input"];
 
   connect() {
-    console.log("connected to dropzone controller");
     this.dropZone = createDropZone(this);
     this.hideFileInput();
     this.bindEvents();
@@ -161,6 +165,19 @@ function createDirectUpload(file, url, controller) {
 
 function createDropZone(controller) {
   return new Dropzone(controller.element, {
+    init: function () {
+      if (
+        controller.filenameValue &&
+        controller.filesizeValue &&
+        controller.imageurlValue
+      ) {
+        let mockFile = {
+          name: controller.filenameValue,
+          size: controller.filesizeValue,
+        };
+        this.displayExistingFile(mockFile, controller.imageurlValue);
+      }
+    },
     url: controller.url,
     headers: controller.headers,
     maxFiles: controller.maxFiles,

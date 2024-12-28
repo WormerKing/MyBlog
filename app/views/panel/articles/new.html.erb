@@ -35,16 +35,12 @@
             </div>
             <div class="row pt-3 mx-3">
               <div class="col-sm-12 py-2">
-                <div class="form-floating">
-                  <%= form.hidden_field :content, id: "editor_content_hidden" %>
-
-                  <div
-                    id="editor_content"
-                    class="border border-2 rounded border-secondary bg-white"
-                    data-editor-target="editor_content"
-                  >
+                <%= render "shared/editor", form: form %>
+                <% unless @article.errors[:content].empty? %>
+                  <div class="alert alert-danger my-2 text-center" role="alert">
+                    <%= "İçerik #{@article.errors[:content].first}" %></h5>
                   </div>
-                </div>
+                <% end %>
               </div>
             </div>
             <div class="row pt-3 mx-3">
@@ -62,7 +58,11 @@
                 </div>
               </div>
               <div class="col-sm-6 py-3">
-                <div id="wormer" data-controller="slimselect">
+                <div
+                  id="wormer"
+                  data-controller="slimselect"
+                  data-slimselect-array="<%= @old_tags&.join('|')%>"
+                >
                   <%= form.select(
                     :tags,
                     @tags,

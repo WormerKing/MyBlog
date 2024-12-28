@@ -1,5 +1,9 @@
-<%# @source,@max_files,@multiple,@%>
-<div class="dropzone dropzone-default bg-warning-subtle dz-clickable form-control w-75 h-25 text-center overflow-scroll" style= "max-height:10px;" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-accepted-files="image/*" data-dropzone-max-files="<%= max_files || 1%>" data-upload-multiple="<%= multiple || false%>">
+<%# @source,@max_files,@multiple,@filename,image_url, file_size%>
+<% filename ||= nil%>
+<% image_url ||= nil%>
+<% file_size ||= nil%>
+<div class="dropzone dropzone-default bg-warning-subtle dz-clickable form-control w-75 h-25 text-center overflow-scroll" style= "max-height:10px;" data-controller="dropzone" data-dropzone-max-file-size="5" data-dropzone-accepted-files="image/*" data-dropzone-max-files="<%= max_files || 1%>" data-upload-multiple="<%= multiple || false%>" 
+  data-dropzone-filename-value="<%= filename %>" data-dropzone-imageurl-value="<%= image_url%>" data-dropzone-filesize-value="<%= file_size%>">
    <%= form.file_field source, direct_upload: true, multiple: multiple,data: { dropzone_target: 'input' } %>
    <div class="dropzone-msg dz-message needsclick">
      <h3 class="dropzone-msg-title"><%= defined?(title) ? title : "Dosyaları buraya yükleyin"%></h3>

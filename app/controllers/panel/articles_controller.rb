@@ -3,7 +3,7 @@ module Panel
     before_action :select_article, only: %w[edit update destroy]
 
     def index
-      @articles = Article.all
+      @articles = Article.all.sort
     end
 
     def new
@@ -21,23 +21,31 @@ module Panel
         !Tag.exists?(title: tag)
       end.map { |tag| Tag.find_by_title(tag) }
 
-      if @article.invalid?
+      if @article.valid?
+        if @article.save
+          @article.save_article_images
+          flash[:notice] = 'Yazı başarıyla eklendi'
+          redirect_to(articles_path)
+
+        else
+          flash[:alert] = 'Kayıt sırasında beklenmeyen bir hata meydana geldi'
+          @old_tags = params.require(:article)['tags']
+          @categories = Category.pluck(:name)
+          @tags = Tag.pluck(:title)
+          render :new, status: 500
+        end
+      else
         flash[:alert] = 'Validasyon başarısız!'
+        @old_tags = params.require(:article)['tags']
         @categories = Category.pluck(:name)
         @tags = Tag.pluck(:title)
-
-        render :new, status: 422
-      elsif @article.save
-        @article.save_article_images
-        flash[:notice] = 'yazı başarıyla eklendi'
-        redirect_to(articles_path)
-      else
-        flash[:error] = 'Validasyon başarılı ama kayıt teknik bir sorun nedeniyle eklenemedi!'
         render :new, status: 422
       end
     end
 
     def edit
+      get_image_datas
+      @old_tags = @article.tags.pluck(:title)
       @categories = Category.pluck(:name)
       @tags = Tag.pluck(:title)
     end
@@ -50,13 +58,15 @@ module Panel
         @category = Category.find_by_name(get_params(:category)[:category])
       end
 
-      if @article.update(get_params(:name, :header, :content,
+      if @article.update(get_params(:title, :header, :content,
                                     :image)) && @article.update(category: @category, tags: @tags)
         @article.save_article_images
         flash[:notice] = "Kayıt #{@article.id} başarıyla güncellendi"
         redirect_to(articles_path)
       else
         flash[:alert] = 'Validasyon başarısız!'
+        @old_tags = params.require(:article)['tags'] || @article.tags.pluck(:title)
+        get_image_datas
         @categories = Category.pluck(:name)
         @tags = Tag.pluck(:title)
         render :edit, status: 422
@@ -94,10 +104,15 @@ module Panel
     private
 
     def get_params(*arr)
-      puts '#' * 100
-      puts params.require(:article)
-      puts '#' * 100
       params.require(:article).permit(arr)
+    end
+
+    def get_image_datas
+      return unless @article.image.persisted?
+
+      @filename = @article.image.filename.to_s
+      @filesize = @article.image.byte_size
+      @image_url = rails_blob_url(@article.image)
     end
 
     def select_article
@@ -109,4 +124,3 @@ module Panel
     end
   end
 end
-

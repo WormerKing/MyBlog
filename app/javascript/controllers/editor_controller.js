@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus";
 import EditorJS from "@editorjs/editorjs";
 
 // These are the plugins
-import CodeTool from "@editorjs/code";
 import Header from "@editorjs/header";
 import ImageTool from "@editorjs/image";
 import List from "@editorjs/list";
@@ -10,38 +9,82 @@ import Paragraph from "@editorjs/paragraph";
 import DragDrop from "editorjs-drag-drop";
 import InlineCode from "@editorjs/inline-code";
 import editorjsCodecup from "@calumk/editorjs-codecup";
-import ColorPlugin from "editorjs-text-color-plugin";
+import Delimeter from "@coolbytes/editorjs-delimiter";
+import Table from "editorjs-table";
+import Underline from "@editorjs/underline";
+import Undo from "editorjs-undo";
+import Alert from "editorjs-alert";
+import Warning from "@editorjs/warning";
+import Quote from "@editorjs/quote";
 import Marker from "@editorjs/marker";
 
 // Connects to data-controller="editor"
 export default class extends Controller {
-  static targets = ["editor_content"];
+  static targets = ["hidden_input", "area"];
   static values = {
-    readOnly: Boolean,
+    readonly: Boolean,
+    editorData: String,
     imageUploadUrl: String,
   };
 
   csrfToken() {
     const metaTag = document.querySelector("meta[name='csrf-token']");
-    console.log(metaTag);
     return metaTag ? metaTag.content : "";
   }
   connect() {
-    console.log("Hello, Stimulus!", this.element);
-    console.log(this.imageUploadUrlValue);
-
     const initialContent = this.getInitialContent();
 
-    this.contentEditor = new EditorJS({
+    this.editor = new EditorJS({
       // Holder is the target element
-      onReady: () => {
-        // new Undo({ editor: this.editor });
-        new DragDrop(this.contentEditor);
+      onChange: async () => {
+        let content = await this.editor.saver.save();
+        this.hidden_inputTarget.value = JSON.stringify(content);
       },
-      readOnly: this.readOnly,
-      holder: this.editor_contentTarget,
+      onReady: () => {
+        new Undo({ editor: this.editor });
+        new DragDrop(this.editor);
+      },
+      readOnly: this.readonlyValue,
+      holder: this.areaTarget,
       data: initialContent,
       tools: {
+        // marker: ColorPlugin,
+        quote: {
+          class: Quote,
+          inlineToolbar: true,
+          shortcut: "CMD+SHIFT+O",
+          config: {
+            quotePlaceholder: "Yorum giriniz",
+            captionPlaceholder: "Yorum sahibi",
+          },
+        },
+        warning: {
+          class: Warning,
+          inlineToolbar: true,
+          shortcut: "CMD+SHIFT+W",
+          config: {
+            titlePlaceholder: "Title",
+            messagePlaceholder: "Message",
+          },
+        },
+        alert: Alert,
+        marker: Marker,
+        underline: Underline,
+        table: {
+          class: Table,
+          inlineToolbar: true,
+        },
+        delimeter: {
+          class: Delimeter,
+          config: {
+            styleOptions: ["star", "dash", "line"],
+            defaultStyle: "star",
+            lineWidthOptions: [8, 15, 25, 35, 50, 60, 100],
+            defaultLineWidth: 25,
+            lineThicknessOptions: [1, 2, 3, 4, 5, 6],
+            defaultLineThickness: 2,
+          },
+        },
         header: {
           class: Header,
         },
@@ -60,7 +103,7 @@ export default class extends Controller {
           class: ImageTool,
           config: {
             endpoints: {
-              byFile: this.imageUploadUrlValue, // `/panel/yazilarim/upload_image`,
+              byFile: this.imageUploadUrlValue,
             },
             additionalRequestHeaders: {
               "X-CSRF-Token": this.csrfToken(),
@@ -69,33 +112,16 @@ export default class extends Controller {
         },
       },
     });
-
-    this.element.addEventListener("submit", this.saveEditorData.bind(this));
   }
 
   getInitialContent() {
-    const hiddenContentField = document.getElementById("editor_content_hidden");
-    if (hiddenContentField && hiddenContentField.value) {
-      return JSON.parse(hiddenContentField.value);
-    }
-    return {};
-  }
-
-  async saveEditorData(event) {
-    event.preventDefault();
-
-    const outputData = await this.contentEditor.save();
-    const articleForm = this.element;
-
-    const hiddenInput = document.getElementById("editor_content_hidden");
-
-    hiddenInput.value = JSON.stringify(outputData);
-    articleForm.submit();
+    let body = this.editorDataValue ? JSON.parse(this.editorDataValue) : {};
+    return body;
   }
 
   disconnect() {
-    if (this.contentEditor) {
-      this.contentEditor = null;
+    if (this.editor) {
+      this.editor = null;
     }
   }
 }

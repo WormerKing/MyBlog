@@ -3,7 +3,6 @@ module Pages
     before_action :select_tag, only: %i[show]
 
     def show
-      puts params[:id]
     end
 
     private

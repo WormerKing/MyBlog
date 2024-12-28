@@ -57,7 +57,7 @@ gem 'tzinfo-data', platforms: %i[windows jruby]
 gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
-gem 'image_processing', "~> 1.2"
+gem 'image_processing', '~> 1.2'
 
 gem 'bootstrap', '~> 5.1'
 gem 'jquery-rails', '~> 4.4'
@@ -66,6 +66,9 @@ gem 'sassc-rails', '~> 2.1', '>= 2.1.2'
 group :development, :test do
   # Create Fake values
   gem 'faker', '~> 3.2'
+
+  # Rails lsp server
+  gem 'ruby-lsp-rails', '~> 0.3.27'
 
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]

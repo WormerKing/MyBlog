@@ -5,7 +5,12 @@
     <div class="row">
       <div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
         <div class="border border-success rounded-2 bg-primary-subtle tasiyici">
-          <%= form_for(@article,method: "patch",class:"form-floating",data: {controller: "editor",editor_image_upload_url_value: upload_image_articles_path}) do |form| %>
+          <%= form_for(@article,method: "patch",class:"form-floating",data: {
+            controller: "editor",
+            editor_image_upload_url_value: upload_image_articles_path,
+            editor_editor_data_value: @article.content,
+            editor_readonly_value: false
+          }) do |form| %>
             <div class="row">
               <h4 class="pt-4 ps-5 text-dark">Yazı düzenle</h4>
             </div>
@@ -35,14 +40,14 @@
             </div>
             <div class="row pt-3 mx-3">
               <div class="col-sm-12 py-2">
-                <%= form.hidden_field :content, id: "editor_content_hidden" %>
+                <%= render "shared/editor", form: form %>
+                <% unless @article.errors[:content].empty? %>
+                  <div class="bg-danger-subtle text-center rounded py-2">
+                    <h5>
+                      <%= "İçerik #{@article.errors[:content].first}" %></h5>
+                  </div>
+                <% end %>
 
-                <div
-                  id="editor_content"
-                  class="border border-2 rounded border-dark bg-white"
-                  data-editor-target="editor_content"
-                >
-                </div>
               </div>
             </div>
             <div class="row pt-3 mx-3">
@@ -62,7 +67,7 @@
                 <div
                   id="wormer"
                   data-controller="slimselect"
-                  data-slimselect-array="<%= @article.tags.pluck(:title).join("|")%>"
+                  data-slimselect-array="<%= @old_tags&.join('|')%>"
                 >
                   <%= form.select(
                     :tags,
@@ -84,7 +89,10 @@
                 title: "Ana resim",
                 max_files: 1,
                 multiple: false,
-                source: :image %>
+                source: :image,
+                filename: @filename,
+                file_size: @filesize,
+                image_url: @image_url %>
               </div>
             </div>
 
@@ -100,4 +108,3 @@
     </div>
   </div>
 </div>
-

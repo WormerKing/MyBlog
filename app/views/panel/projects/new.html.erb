@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
         <div class="border border-success rounded-2 bg-primary-subtle">
-          <%= form_for(@project,method: "post",class:"form-floating",data: {controller: "editor",editor_image_upload_url_value: upload_image_projects_path }) do |form| %>
+          <%= form_for(@project,method: "post",class:"form-floating",data: {controller: "editor",editor_image_upload_url_value: upload_image_projects_path, editor_readonly_value: false,editor_editor_data_value: {}}) do |form| %>
             <div class="row">
               <h4 class="pt-4 ps-5 text-dark">Proje Ekle</h4>
             </div>
@@ -18,7 +18,7 @@
                     id: "floatingTitle",
                     required: "",
                   ) %>
-                  <%= form.label :title, for: "floatingTitle" %>
+                  <%= form.label I18n.translate("title"), for: "floatingTitle" %>
                   <%= print_error_messages(@project, :title) %>
                 </div>
               </div>
@@ -28,7 +28,7 @@
                                   class: "form-control",
                                   id: "floatingHeader",
                                   required: "" %>
-                  <%= form.label :header, for: "floatingHeader" %>
+                  <%= form.label I18n.translate("header"), for: "floatingHeader" %>
                   <%= print_error_messages(@project, :header) %>
                 </div>
               </div>
@@ -36,22 +36,19 @@
                 <div class="form-floating">
                   <%= form.url_field(:url, class: "form-control", id: "floatingUrl", required: "") %>
                   <label for="floatingInput3">Url</label>
-                  <%= form.label :url, for: "floatingUrl" %>
+                  <%= form.label I18n.translate("url"), for: "floatingUrl" %>
                   <%= print_error_messages(@project, :url) %>
                 </div>
               </div>
             </div>
             <div class="row pt-3 mx-3">
               <div class="col-sm-12 py-2">
-                <div class="form-floating">
-                  <div
-                    data-editor-target="editor_content"
-                    id="editor_content"
-                    class="border border-secondary rounded-3 bg-white"
-                  >
+                <%= render "shared/editor", form: form %>
+                <% unless @project.errors[:content].empty? %>
+                  <div class="alert alert-danger text-center" role="alert">
+                    <%= "İçerik #{@project.errors[:content].join("")}" %>
                   </div>
-                  <%= form.hidden_field :content, id: "editor_content_hidden" %>
-                </div>
+                <% end %>
               </div>
             </div>
             <div class="row pt-3 mx-3">
@@ -65,11 +62,15 @@
                     id: "floatingSelect",
                     aria_label: "Floating label select example",
                   ) %>
-                  <label for="floatingSelect">Kategori</label>
+                  <%= form.label I18n.translate("category"), for: "floatingUrl" %>
                 </div>
               </div>
               <div class="col-sm-6 py-3">
-                <div id="wormer" data-controller="slimselect">
+                <div
+                  id="wormer"
+                  data-controller="slimselect"
+                  data-slimselect-array="<%= @old_tags&.join('|')%>"
+                >
                   <%= form.select(
                     :tags,
                     @tags,

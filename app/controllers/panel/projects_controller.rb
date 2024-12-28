@@ -2,7 +2,7 @@ module Panel
   class ProjectsController < ApplicationController
     before_action :select_project, only: %i[show edit update destroy]
     def index
-      @projects = Project.all
+      @projects = Project.all.sort
       # FIXME: end_date ve start_date kısımlarında oluşan hatalar görünmüyor
     end
 
@@ -30,10 +30,12 @@ module Panel
           flash[:notice] = 'Proje başarıyla eklendi'
           redirect_to(projects_path)
         else
+          @old_tags = params.require(:project)['tags']
           flash[:alert] = 'Teknik bir hatadan dolayı kayıt eklenemedi!'
           render :new, status: 422
         end
       else
+        @old_tags = params.require(:project)['tags']
         @categories = Category.pluck(:name)
         @tags = Tag.pluck(:title)
         flash[:alert] = 'Validasyon başarısız!'
@@ -42,6 +44,8 @@ module Panel
     end
 
     def edit
+      get_image_datas
+      @old_tags = @project.tags.pluck(:title)
       @categories = Category.pluck(:name)
       @tags = Tag.pluck(:title)
     end
@@ -52,15 +56,17 @@ module Panel
         !Tag.exists?(title: tag)
       end.map { |tag| Tag.find_by(title: tag) }
       if @project.update(params.require(:project).permit(:title, :header, :url, :content, :start_date,
-                                                         :end_date)) && @project.update(category: @update_category,
-                                                                                        tags: @update_tags)
+                                                         :end_date, :image)) && @project.update(category: @update_category,
+                                                                                                tags: @update_tags)
         @project.save_project_images
         flash[:notice] = "Proje #{@project.id} başarıyla güncellendi"
         redirect_to(projects_path)
       else
         @categories = Category.pluck(:name)
         @tags = Tag.pluck(:title)
+        @old_tags = params.require(:project)['tags'] || @project.tags.pluck(:title)
         flash[:alert] = 'validasyon başarısız'
+        get_image_datas
         render :edit, status: 422
       end
     end
@@ -97,6 +103,14 @@ module Panel
 
     def get_params(*arr)
       params.require(:project).permit(arr)
+    end
+
+    def get_image_datas
+      return unless @project.image.persisted?
+
+      @filename = @project.image.filename.to_s
+      @file_size = @project.image.byte_size
+      @image_url = rails_blob_url(@project.image)
     end
 
     def select_project

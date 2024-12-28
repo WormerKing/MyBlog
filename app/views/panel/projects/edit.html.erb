@@ -5,7 +5,15 @@
     <div class="row">
       <div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
         <div class="border border-success rounded-2 bg-primary-subtle tasiyici">
-          <%= form_for(@project,method: "patch",class:"form-floating",data: {controller: "editor",editor_image_upload_url_value: upload_image_projects_path}) do |form| %>
+          <%= form_for(@project,
+                       method: "patch",
+                       class:"form-floating",
+                       data: {
+                         controller: "editor",
+                         editor_image_upload_url_value: upload_image_projects_path,
+                         editor_editor_data_value: @project.content,
+                         editor_readonly_value: false
+                       }) do |form| %>
             <div class="row">
               <h4 class="pt-4 ps-5 text-dark">Proje Ekle</h4>
             </div>
@@ -18,7 +26,7 @@
                     id: "floatingTitle",
                     required: "",
                   ) %>
-                  <%= form.label :title, for: "floatingTitle" %>
+                  <%= form.label I18n.translate("title"), for: "floatingTitle" %>
                   <%= print_error_messages(@project, :title) %>
                 </div>
               </div>
@@ -28,7 +36,7 @@
                                   class: "form-control",
                                   id: "floatingHeader",
                                   required: "" %>
-                  <%= form.label :header, for: "floatingHeader" %>
+                  <%= form.label I18n.translate("header"), for: "floatingHeader" %>
                   <%= print_error_messages(@project, :header) %>
                 </div>
               </div>
@@ -36,19 +44,20 @@
                 <div class="form-floating">
                   <%= form.url_field(:url, class: "form-control", id: "floatingUrl", required: "") %>
                   <label for="floatingInput3">Url</label>
-                  <%= form.label :url, for: "floatingUrl" %>
+                  <%= form.label I18n.translate("url"), for: "floatingUrl" %>
                   <%= print_error_messages(@project, :url) %>
                 </div>
               </div>
             </div>
             <div class="row pt-3 mx-3">
               <div class="col-sm-12 py-2">
-                <div
-                  data-editor-target="editor_content"
-                  class="border border-3 border-dark bg-white pt-3 rounded"
-                >
-                </div>
-                <%= form.hidden_field(:content, id: "editor_content_hidden") %>
+                <%= render "shared/editor", form: form %>
+                <% unless @project.errors[:content].empty? %>
+                  <div class="bg-danger-subtle text-center rounded py-2">
+                    <h5>
+                      <%= "İçerik #{@project.errors[:content].first}" %></h5>
+                  </div>
+                <% end %>
               </div>
             </div>
             <div class="row pt-3 mx-3">
@@ -68,7 +77,7 @@
                 <div
                   id="wormer"
                   data-controller="slimselect"
-                  data-slimselect-array="<%= @project.tags.pluck(:title).join("|")%>"
+                  data-slimselect-array="<%= @old_tags&.join('|')%>"
                 >
                   <%= form.select(
                     :tags,
@@ -94,6 +103,18 @@
                 <%= form.date_field(:end_date, id: "end_date", class: "ms-3", required: "") %>
               </div>
             </div>
+            <div class="row pt-3 mx-3">
+              <div class="col-sm-12 d-flex justify-content-center">
+                <%= render "shared/dropzone",
+                form: form,
+                source: :image,
+                max_files: 1,
+                multiple: false,
+                filename: @filename,
+                image_url: @image_url,
+                file_size: @file_size %>
+              </div>
+            </div>
             <hr class="border border-secondary">
             <div class="row">
               <div class="col-sm-12 d-flex justify-content-center mb-5">
@@ -106,4 +127,3 @@
     </div>
   </div>
 </div>
-

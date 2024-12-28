@@ -15,9 +15,13 @@ pin "@editorjs/image", to: "@editorjs--image.js" # @2.10.1
 pin "@editorjs/list", to: "@editorjs--list.js" # @2.0.2
 pin "@editorjs/paragraph", to: "@editorjs--paragraph.js" # @2.11.6
 pin "editorjs-drag-drop" # @1.1.16
-pin "@editorjs/code", to: "@editorjs--code.js" # @2.9.3
 pin "@editorjs/inline-code", to: "@editorjs--inline-code.js" # @1.5.1
 pin "@calumk/editorjs-codecup", to: "@calumk--editorjs-codecup.js" # @1.2.0
 pin "@editorjs/marker", to: "@editorjs--marker.js" # @1.4.0
 pin "editorjs-undo" # @2.0.28
-pin "editorjs-text-color-plugin" # @2.0.4
+pin "@coolbytes/editorjs-delimiter", to: "@coolbytes--editorjs-delimiter.js" # @1.0.3
+pin "editorjs-table" # @1.4.10
+pin "@editorjs/underline", to: "@editorjs--underline.js" # @1.2.1
+pin "editorjs-alert" # @1.1.4
+pin "@editorjs/warning", to: "@editorjs--warning.js" # @1.4.1
+pin "@editorjs/quote", to: "@editorjs--quote.js" # @2.7.6

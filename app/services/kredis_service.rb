@@ -3,12 +3,22 @@ class KredisService
     # Clear all key, val datas
     Kredis.clear_all
   end
-  def self.get_aboutme
+
+  def self.get_aboutme(type = 'object')
     aboutme = Kredis.json('aboutme', expires_in: 10.minute)
 
-    aboutme.value = Aboutme.first.to_json if aboutme.value.nil?
+    aboutme.value = Aboutme.first.to_json(methods: :get_image_url) if aboutme.value.nil?
 
-    Aboutme.new(JSON.load(aboutme.value))
+    params = JSON.parse(aboutme.value)
+    if type == 'object'
+      params.delete('get_image_url')
+      Aboutme.new(params)
+    elsif type == 'json'
+      image_url = params['get_image_url']
+      params.delete('get_image_url')
+      params.store('image_url', image_url)
+      params
+    end
   end
 
   def self.get_top_projects
@@ -23,14 +33,17 @@ class KredisService
                                          tags: {
                                            only: :title
                                          }
-                                       })
+                                       }, methods: :get_image_url)
     end
-    JSON.load(projects.value).each do |i|
+    JSON.parse(projects.value).each do |i|
       i.each do |j|
         tags = j['tags']
+        image_url = j['get_image_url']
         j.delete('tags')
+        j.delete('get_image_url')
         j.store('obje', Project.new(j))
         j.store('tags', tags)
+        j.store('image_url', image_url)
       end
     end
   end
