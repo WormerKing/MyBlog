@@ -43,7 +43,7 @@
                 <%= render "shared/editor", form: form %>
                 <% unless @article.errors[:content].empty? %>
                   <div class="bg-danger-subtle text-center rounded py-2">
-                    <h5>
+                    <h5 class="text-break px-3">
                       <%= "İçerik #{@article.errors[:content].first}" %></h5>
                   </div>
                 <% end %>

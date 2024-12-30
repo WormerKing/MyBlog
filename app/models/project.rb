@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
+# Project model class
 class Project < ApplicationRecord
   include ProjectImagesHandler
+  include ContentValidationHandler
 
   belongs_to :category, validate: true
   has_and_belongs_to_many :tags
@@ -22,9 +26,8 @@ class Project < ApplicationRecord
               too_short: 'kısmı en az %<count>s karakter olmalıdır!',
               too_long: 'kısmı en fazla %<count>s karakter olabilir!'
             }
-
-  # TODO: content kısmını activerecord_json_validator ile validate et
-  # validates :content, presence: { message: 'kısmı boş bırakılamaz!' }
+  # Content validation
+  validate :json_validation
 
   validates :url,
             presence: { message: 'kısmı boş bırakılamaz!' },

@@ -10,7 +10,6 @@ import DragDrop from "editorjs-drag-drop";
 import InlineCode from "@editorjs/inline-code";
 import editorjsCodecup from "@calumk/editorjs-codecup";
 import Delimeter from "@coolbytes/editorjs-delimiter";
-import Table from "editorjs-table";
 import Underline from "@editorjs/underline";
 import Undo from "editorjs-undo";
 import Alert from "editorjs-alert";
@@ -70,10 +69,6 @@ export default class extends Controller {
         alert: Alert,
         marker: Marker,
         underline: Underline,
-        table: {
-          class: Table,
-          inlineToolbar: true,
-        },
         delimeter: {
           class: Delimeter,
           config: {

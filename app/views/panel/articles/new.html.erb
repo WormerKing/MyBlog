@@ -18,7 +18,7 @@
                     id: "floatingTitle",
                     required: "",
                   ) %>
-                  <%= form.label :title, for: "floatingTitle" %>
+                  <%= form.label I18n.translate("title"), for: "floatingTitle" %>
                   <%= print_error_messages(@article, :title) %>
                 </div>
               </div>
@@ -28,7 +28,7 @@
                                   class: "form-control form-control-lg",
                                   id: "floatingHeader",
                                   required: "" %>
-                  <%= form.label :header, for: "floatingHeader" %>
+                  <%= form.label I18n.translate("header"), for: "floatingHeader" %>
                   <%= print_error_messages(@article, :header) %>
                 </div>
               </div>
@@ -37,8 +37,8 @@
               <div class="col-sm-12 py-2">
                 <%= render "shared/editor", form: form %>
                 <% unless @article.errors[:content].empty? %>
-                  <div class="alert alert-danger my-2 text-center" role="alert">
-                    <%= "İçerik #{@article.errors[:content].first}" %></h5>
+                  <div class="alert alert-danger my-2 text-center text-break">
+                    <h5 class="py-3 text-break"><%= "İçerik #{@article.errors[:content].first}" %></h5>
                   </div>
                 <% end %>
               </div>
@@ -54,7 +54,7 @@
                     id: "floatingSelect",
                     aria_label: "Floating label select example",
                   ) %>
-                  <label for="floatingSelect">Kategori</label>
+                  <%= form.label I18n.translate("category"), for: "floatingSelect" %>
                 </div>
               </div>
               <div class="col-sm-6 py-3">

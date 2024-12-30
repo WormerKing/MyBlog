@@ -52,7 +52,7 @@ if %w[development test].include?(Rails.env)
     Article.create(
       title: Faker::Team.unique.name,
       header: Faker::Lorem.words(number: 10).join(' '),
-      # body: Faker::Lorem.paragraphs(number: 3).join,
+      content: { time: "#{DateTime.now}", blocks: [] }.to_json,
       category: Category.last,
       tags: Tag.order(created_at: :desc).limit(6)
     )

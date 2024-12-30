@@ -1,5 +1,6 @@
 class Article < ApplicationRecord
   include ArticleImagesHandler
+  include ContentValidationHandler
 
   belongs_to :category, validate: true
   has_and_belongs_to_many :tags
@@ -19,6 +20,8 @@ class Article < ApplicationRecord
               too_long: 'kısmı en fazla %<count>s karakter uzunluğunda olabilir!'
             }
 
-  validates :content, presence: { message: 'kısmı boş bırakılamaz!' }
+  # Content validation
+  validate :json_validation
+
   before_save :reorganize_title
 end

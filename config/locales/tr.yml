@@ -28,6 +28,8 @@
 #       enabled: "ON"
 tr:
   id: "İd"
+  the: ""
+  property: "Özellik"
   actions: "Aktiviteler"
   tags: "Etiketler"
   content: "içerik"

@@ -1,0 +1,58 @@
+{
+  "type": "object",
+  "properties": {
+    "time": {
+      "type": "integer"
+    },
+    "version": {
+      "type": "string"
+    },
+    "blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": [
+              "paragraph",
+              "header",
+              "list",
+              "image",
+              "quote",
+              "video",
+              "table",
+              "code",
+              "raw",
+              "linkTool",
+              "embed"
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1
+              },
+              "level": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 6
+              },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": ["type", "data"]
+      }
+    }
+  },
+  "required": ["time", "version", "blocks"]
+}
