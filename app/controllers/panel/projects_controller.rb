@@ -28,6 +28,7 @@ module Panel
         if @project.save
           @project.save_project_images
           flash[:notice] = 'Proje başarıyla eklendi'
+          KredisService.clear_data('top_projects')
           redirect_to(projects_path)
         else
           @old_tags = params.require(:project)['tags']
@@ -60,6 +61,7 @@ module Panel
                                                                                                 tags: @update_tags)
         @project.save_project_images
         flash[:notice] = "Proje #{@project.id} başarıyla güncellendi"
+        KredisService.clear_data('top_projects')
         redirect_to(projects_path)
       else
         @categories = Category.pluck(:name)
@@ -74,6 +76,7 @@ module Panel
     def destroy
       if @project.destroy
         flash[:notice] = 'Kayıt başarıyla silindi'
+        KredisService.clear_data('top_projects')
       else
         flash[:alert] = 'Kayıt silmede hata meydana geldi'
       end

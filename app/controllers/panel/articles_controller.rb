@@ -25,6 +25,7 @@ module Panel
         if @article.save
           @article.save_article_images
           flash[:notice] = 'Yazı başarıyla eklendi'
+          KredisService.clear_data('top_articles')
           redirect_to(articles_path)
 
         else
@@ -62,6 +63,7 @@ module Panel
                                     :image)) && @article.update(category: @category, tags: @tags)
         @article.save_article_images
         flash[:notice] = "Kayıt #{@article.id} başarıyla güncellendi"
+        KreisService.clear_data('top_articles')
         redirect_to(articles_path)
       else
         flash[:alert] = 'Validasyon başarısız!'
@@ -76,6 +78,7 @@ module Panel
     def destroy
       if @article.destroy
         flash[:notice] = 'Kayıt başarıyla silindi'
+        KreisService.clear_data('top_articles')
       else
         flash[:alert] = 'Kayıt silmede hata meydana geldi'
       end

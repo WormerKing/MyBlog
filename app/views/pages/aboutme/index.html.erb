@@ -11,7 +11,11 @@
       <div class="col-lg-5 offset-lg-1 text-start pt-5 pt-lg-0">
         <h1>Ben kimim ?</h1>
         <p class="fs-5">
-          <%= @aboutme["body"] %>
+          <% if @aboutme["body"] %>
+            <%= @aboutme["body"] %>
+          <% else %>
+            Boş
+          <% end %>
         </p>
         <%= link_to(
           "Bana mail gönderin",

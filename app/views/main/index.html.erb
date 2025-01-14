@@ -3,7 +3,7 @@
     <div class="row py-5 ">
       <div class="col-sm-6 text-start">
         <h1>Ben kimim ?</h1>
-        <p class="fs-5 pt-4"><%= @aboutme["body"][0..90] %>...</p>
+        <p class="fs-5 pt-4"><%= defined?(@aboutme) ? @aboutme["body"][0..90] : "wormer" %></p>
         <%= link_to(
           "Devamını oku",
           pages_aboutme_path,
@@ -11,7 +11,7 @@
         ) %>
       </div>
       <div class="col-sm-5 offset-sm-1">
-        <% if @aboutme["image_url"] %>
+        <% if !@aboutme.nil? && @aboutme["image_url"] %>
           <%= image_tag((request.base_url + @aboutme["image_url"]), class: "w-100 rounded") %>
         <% else %>
           <img src="https://picsum.photos/id/13/1920/1080" alt="" class="w-100 rounded">
@@ -25,9 +25,10 @@
     <div class="row text-center">
       <h1>Son yaptığım projelerim</h1>
     </div>
-    <% @projects.each do |project| %>
+    <% @projects&.each do |project| %>
       <div class="row py-5">
         <% project.each do |p| %>
+          <% next if p.nil? %>
           <div class="col-sm-5 py-3 <%= "offset-sm-2" if project.last == p %>">
             <div class="row">
               <div class="col-lg-6 order-last order-lg-first text-sm-center text-lg-start">
@@ -94,9 +95,10 @@
     <div class="row text-center">
       <h1>Son blog yazılarım</h1>
     </div>
-    <% @articles.each do |article| %>
+    <% @articles&.each do |article| %>
       <div class="row">
         <% article.each do |a| %>
+          <% next if a.nil? %>
           <div
             class="
               col-sm-5 my-5 border-bottom text-center text-md-start border-dark

@@ -4,12 +4,21 @@ class KredisService
     Kredis.clear_all
   end
 
+  def self.clear_data(key_name)
+    Kredis.json(key_name).value = nil
+  end
+
   def self.get_aboutme(type = 'object')
     aboutme = Kredis.json('aboutme', expires_in: 10.minute)
 
     aboutme.value = Aboutme.first.to_json(methods: :get_image_url) if aboutme.value.nil?
 
-    params = JSON.parse(aboutme.value)
+    begin
+      params = JSON.parse(aboutme.value)
+    rescue TypeError
+      return nil
+    end
+
     if type == 'object'
       params.delete('get_image_url')
       Aboutme.new(params)
@@ -35,16 +44,22 @@ class KredisService
                                          }
                                        }, methods: :get_image_url)
     end
-    JSON.parse(projects.value).each do |i|
-      i.each do |j|
-        tags = j['tags']
-        image_url = j['get_image_url']
-        j.delete('tags')
-        j.delete('get_image_url')
-        j.store('obje', Project.new(j))
-        j.store('tags', tags)
-        j.store('image_url', image_url)
+    begin
+      JSON.parse(projects.value).each do |i|
+        i.each do |j|
+          next if j.nil?
+
+          tags = j['tags']
+          image_url = j['get_image_url']
+          j.delete('tags')
+          j.delete('get_image_url')
+          j.store('obje', Project.new(j))
+          j.store('tags', tags)
+          j.store('image_url', image_url)
+        end
       end
+    rescue TypeError
+      nil
     end
   end
 

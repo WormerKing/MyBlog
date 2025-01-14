@@ -35,3 +35,5 @@
 /config/master.key
 
 yapılacaklar.rb
+
+/config/credentials/development.key

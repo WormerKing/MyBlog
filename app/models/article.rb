@@ -3,9 +3,9 @@ class Article < ApplicationRecord
   include ContentValidationHandler
 
   belongs_to :category, validate: true
-  has_and_belongs_to_many :tags
-  has_one_attached :image
-  has_many :article_images
+  has_and_belongs_to_many :tags, dependent: :destroy
+  has_one_attached :image, dependent: :destroy
+  has_many :article_images, dependent: :destroy
 
   validates :title, length: {
     in: 5..40,

@@ -6,9 +6,9 @@ class Project < ApplicationRecord
   include ContentValidationHandler
 
   belongs_to :category, validate: true
-  has_and_belongs_to_many :tags
+  has_and_belongs_to_many :tags, dependent: :destroy
   has_one_attached :image
-  has_many :project_images
+  has_many :project_images, dependent: :destroy
 
   validate :control_dates
 

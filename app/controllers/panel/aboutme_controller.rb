@@ -5,15 +5,17 @@ module Panel
     def show; end
 
     def edit
-        if @aboutme.profile_photo.persisted?
-            @filename = @aboutme.profile_photo.filename.to_s
-            @file_size = @aboutme.profile_photo.byte_size
-            @image_url = rails_blob_url(@aboutme.profile_photo)
-        end
+      return unless @aboutme.profile_photo.persisted?
+
+      @filename = @aboutme.profile_photo.filename.to_s
+      @file_size = @aboutme.profile_photo.byte_size
+      @image_url = rails_blob_url(@aboutme.profile_photo)
     end
 
     def update
       if @aboutme.update(get_params)
+        # Reset the cache
+        KredisService.clear_data('aboutme')
         redirect_to(panel_path)
       else
         render :edit

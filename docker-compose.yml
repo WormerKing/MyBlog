@@ -1,0 +1,80 @@
+# version: "3.8"
+#
+# services:
+#   # Rails uygulaması
+#   web:
+#     build: .
+#     command: bash script.sh
+#     volumes:
+#       - ".:/app"
+#     ports:
+#       - "3000:3000"
+#     depends_on:
+#       - cache_server
+#     environment:
+#       - RAILS_ENV=development
+#       - database_user=wormer
+#       - database_password=wormer
+#       - database_name=myapp_development
+#       - database_host=db
+#       - database_port=5432
+#
+#   # Valkey servisi
+#   cache_server:
+#     image: valkey/valkey
+#     ports:
+#       - "6379:6379"
+#     depends_on:
+#       - db
+#
+#   # PostgreSQL veritabanı
+#   db:
+#     image: postgres:14
+#     ports:
+#       - "5432:5432"
+#     environment:
+#       POSTGRES_USER: wormer
+#       POSTGRES_PASSWORD: wormer
+#       POSTGRES_DB: myapp_development
+
+version: "3.8"
+
+services:
+  # Rails uygulaması
+  web:
+    build: .
+    command: bash /app/script.sh
+    volumes:
+      - ".:/app"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+      - cache_server
+    environment:
+      - RAILS_ENV=development
+      - database_user=wormer
+      - database_password=wormer
+      - database_name=myapp_development
+      - database_host=db
+      - database_port=5432
+      - VALKEY_URL=redis://cache_server:6379
+    entrypoint: ["./wait-for-it.sh", "db:5432", "--", "bash", "/app/script.sh"]
+
+  # Valkey servisi
+  cache_server:
+    image: valkey/valkey
+    ports:
+      - "6379:6379"
+    depends_on:
+      - db
+
+  # PostgreSQL veritabanı
+  db:
+    image: postgres:14
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: wormer
+      POSTGRES_PASSWORD: wormer
+      POSTGRES_DB: myapp_development
