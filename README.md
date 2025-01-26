@@ -1,24 +1,49 @@
-# README
+# Tuncay Dinler MyBlog Project
+Tuncay Dinler's offical MyBlog web site source codes. I developed this project with rails for illustrative purposes.
+If you want this repository, please read License.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# **Installation(Docker)**
 
-Things you may want to cover:
+Required packages:
+* Docker
+* Docker-Compose
 
-* Ruby version
+Run blog app:
+```bash
+git clone https://github.com/WormerKing/MyBlog.git
+cd MyBlog
+docker-compose down
+docker-compose up --build
+```
 
-* System dependencies
+After open `http://localhost:3000`.
+<hr/>
 
-* Configuration
+# **Installation(Ruby)**
+Required packages:
+* Ruby 3-2-0
+* Rails
+* Postgresql(Database Service)
+* Valkey(Cache Service)
+* Javascript Runtime(Nodejs or Bun)
 
-* Database creation
+Run blog app:
+```bash
+git clone https://github.com/WormerKing/MyBlog.git
+cd MyBlog
+bundle install && bundle update
 
-* Database initialization
+// Copy your own env variables
+// Read config/database.yml
+// cp (your_env_file) .env
 
-* How to run the test suite
+bin/rails db:create
+bin/rails db:migrate
 
-* Services (job queues, cache servers, search engines, etc.)
+// If need default vals
+bin/rails db:seed
 
-* Deployment instructions
-
-* ...
+// Start rails server
+bin/rails s
+```
+After open `http://localhost:3000`
