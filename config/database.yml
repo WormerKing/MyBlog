@@ -19,10 +19,11 @@ development:
 
 test:
   <<: *default
-  database: myapp_test
-  username: wormer
-  password: wormer
-  host: db
+  database: <%= ENV["database_name"]%>
+  username: <%= ENV["database_user"]%>
+  password: <%= ENV["database_password"]%>
+  host: <%= ENV["database_host"]%>
+  port: <%= ENV["database_port"]%>
 
 production:
   <<: *default

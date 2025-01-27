@@ -13,20 +13,25 @@ class KredisService
 
     aboutme.value = Aboutme.first.to_json(methods: :get_image_url) if aboutme.value.nil?
 
+    return {} if aboutme.value.nil? || Aboutme.first.nil?
+
     begin
       params = JSON.parse(aboutme.value)
     rescue TypeError
       return nil
     end
-
-    if type == 'object'
-      params.delete('get_image_url')
-      Aboutme.new(params)
-    elsif type == 'json'
-      image_url = params['get_image_url']
-      params.delete('get_image_url')
-      params.store('image_url', image_url)
-      params
+    begin
+      if type == 'object'
+        params.delete('get_image_url')
+        Aboutme.new(params)
+      elsif type == 'json'
+        image_url = params['get_image_url']
+        params.delete('get_image_url')
+        params.store('image_url', image_url)
+        params
+      end
+    rescue NoMethodError
+      {}
     end
   end
 
