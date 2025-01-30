@@ -13,7 +13,7 @@ class KredisService
 
     aboutme.value = Aboutme.first.to_json(methods: :get_image_url) if aboutme.value.nil?
 
-    return {} if aboutme.value.nil? || Aboutme.first.nil?
+    return {} if aboutme.value.nil?
 
     begin
       params = JSON.parse(aboutme.value)
