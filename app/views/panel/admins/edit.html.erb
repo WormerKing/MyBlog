@@ -5,98 +5,9 @@
     <div class="row">
       <div class="col-sm-12 rounded-3 d-flex flex-row justify-content-center">
         <div class="border border-success rounded-2 bg-primary-subtle tasiyici">
-          <%= form_for(@admin,method: "patch",class:"form-floating") do |form| %>
-            <div class="row">
-              <h4 class="pt-4 ps-5 text-dark">Yönetici düzenle</h4>
-            </div>
-            <div class="row mx-3">
-              <div class="col-sm-6 py-2 text-start">
-                <div class="form-floating">
-                  <%= form.text_field(
-                    :firstname,
-                    class: "form-control form-control-lg",
-                    id: "floatingFirstName",
-                    required: "",
-                  ) %>
-                  <%= form.label I18n.translate("name"), for: "floatingFirstName" %>
-                  <%= print_error_messages(@admin, :firstname) %>
-                </div>
-              </div>
-              <div class="col-sm-6 py-2 text-start">
-                <div class="form-floating">
-                  <%= form.text_field(
-                    :lastname,
-                    class: "form-control form-control-lg",
-                    id: "floatingLastname",
-                    required: "",
-                  ) %>
-                  <%= form.label I18n.translate("lastname"), for: "floatingLastname" %>
-                  <%= print_error_messages(@admin, :lastname) %>
-                </div>
-              </div>
-            </div>
-            <div class="row mx-3">
-              <div class="col-sm-6 py-2 text-start">
-                <div class="form-floating">
-                  <%= form.text_field(
-                    :username,
-                    class: "form-control form-control-lg",
-                    id: "floatingUsername",
-                    required: "",
-                  ) %>
-                  <%= form.label I18n.translate("username"), for: "floatingUsername" %>
-                  <%= print_error_messages(@admin, :username) %>
-                </div>
-              </div>
-              <div class="col-sm-6 py-2 text-start">
-                <div class="form-floating">
-                  <%= form.email_field(
-                    :email,
-                    class: "form-control form-control-lg",
-                    id: "floatingEmail",
-                    required: "",
-                  ) %>
-                  <%= form.label I18n.translate "Eposta", for: "floatingEmail" %>
-                  <%= print_error_messages(@admin, :email) %>
-                </div>
-              </div>
-            </div>
-            <div class="row mx-3">
-              <div class="col-sm-6 py-2 text-start">
-                <div class="form-floating">
-                  <%= form.password_field(
-                    :password,
-                    value: @admin.password,
-                    class: "form-control form-control-lg",
-                    id: "floatingPassword",
-                  ) %>
-                  <%= form.label I18n.translate("password"), for: "floatingPassword" %>
-                  <%= print_error_messages(@admin, :password) %>
-                </div>
-              </div>
-              <div class="col-sm-6 py-2 text-start">
-                <div class="form-floating">
-                  <%= form.password_field(
-                    :password_confirmation,
-                    value: (@admin.password_confirmation if @admin.password_confirmation),
-                    class: "form-control form-control-lg",
-                    id: "floatingRePassword",
-                  ) %>
-                  <%= form.label I18n.translate("password_confirmation"), for: "floatingRePassword" %>
-                  <%= print_error_messages(@admin, :password_confirmation) %>
-                </div>
-              </div>
-            </div>
-            <hr class="border border-secondary">
-            <div class="row">
-              <div class="col-sm-12 d-flex justify-content-center mb-5">
-                <%= form.submit("Kaydet", class: "btn btn-primary mt-4") %>
-              </div>
-            </div>
-          <% end %>
+          <%= render "form", method: "patch" %>
         </div>
       </div>
     </div>
   </div>
 </div>
-

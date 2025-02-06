@@ -1,0 +1,30 @@
+<%= form_for(@tag,method: method,class:"form-floating") do |form| %>
+  <div class="row">
+    <h4 class="pt-4 ps-5 text-dark">Etiket
+      <%= method == "post" ? "Ekle" : "Düzenle" %></h4>
+  </div>
+  <hr class="border border-dark">
+  <div class="row mx-3">
+    <div class="col-sm-12 pt-2 text-start">
+      <div class="form-floating">
+        <%= form.text_field(
+          :title,
+          class: "form-control",
+          id: "floatingTitle",
+          required: "",
+        ) %>
+        <%= form.label I18n.translate("title"), for: "floatingTitle" %>
+        <%= print_error_messages(@tag, :title) %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 d-flex justify-content-center mb-3">
+      <input
+        type="submit"
+        value="<%= method == "post" ? 'Ekle' : 'Düzenle'%>"
+        class="btn btn-primary mt-4"
+      >
+    </div>
+  </div>
+<% end %>
